@@ -146,7 +146,13 @@ export default function HeroSlider() {
               <img 
                 src={isDark ? slide.imageDark : slide.imageLight} 
                 alt={slide.rotatingText}
-                className="w-full h-full object-contain drop-shadow-[0_25px_60px_rgba(0,191,255,0.2)]"
+                className="w-full h-full object-contain"
+                style={{
+                  WebkitMaskImage:
+                    "radial-gradient(ellipse 98% 98% at 50% 50%, black 82%, transparent 105%)",
+                  maskImage:
+                    "radial-gradient(ellipse 98% 98% at 50% 50%, black 82%, transparent 105%)",
+                }}
                 loading="eager"
               />
             </motion.div>
