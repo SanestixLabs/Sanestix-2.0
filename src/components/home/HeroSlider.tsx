@@ -6,25 +6,29 @@ import { motion, AnimatePresence } from "framer-motion";
 const slides = [
   {
     rotatingText: "AI Operating Systems.",
-    image: "/hero-slide-ai-os.png",
+    imageDark: "/hero-slide-ai-os.png",
+    imageLight: "/ai-integration-hero.jpg",
     tag: "AI Engineering",
     desc: "We design and build intelligent systems that understand, decide, and act — turning your ideas into real business outcomes.",
   },
   {
     rotatingText: "Intelligent Automation.",
-    image: "/hero-slide-automation.png",
+    imageDark: "/hero-slide-automation.png",
+    imageLight: "/automation-hero.png",
     tag: "Business Automation",
     desc: "We connect your tools, automate your workflows, and let systems handle the work that slows your team down.",
   },
   {
     rotatingText: "Custom Software.",
-    image: "/hero-slide-software.png",
+    imageDark: "/hero-slide-software.png",
+    imageLight: "/custom-software-hero.jpg",
     tag: "Software Development",
     desc: "We engineer bespoke platforms, SaaS products, and applications built around the way your business actually works.",
   },
   {
     rotatingText: "Smart Chatbots.",
-    image: "/hero-slide-chatbots.png",
+    imageDark: "/hero-slide-chatbots.png",
+    imageLight: "/smart-chatbots-hero.png",
     tag: "Conversational AI",
     desc: "Deploy hyper-realistic AI voice agents and context-aware bots to handle inbound support and outbound sales.",
   }
@@ -32,6 +36,19 @@ const slides = [
 
 export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const updateTheme = () => setIsDark(root.classList.contains("dark"));
+
+    updateTheme();
+
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+
+    return () => observer.disconnect();
+  }, []);
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
@@ -127,7 +144,7 @@ export default function HeroSlider() {
               className="w-full h-full lg:absolute max-w-[750px] flex justify-center lg:justify-end lg:-translate-y-20 xl:-translate-y-24 relative z-10"
             >
               <img 
-                src={slide.image} 
+                src={isDark ? slide.imageDark : slide.imageLight} 
                 alt={slide.rotatingText}
                 className="w-full h-full object-contain drop-shadow-[0_25px_60px_rgba(0,191,255,0.2)]"
                 loading="eager"
