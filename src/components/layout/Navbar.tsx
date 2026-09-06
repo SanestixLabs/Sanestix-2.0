@@ -107,7 +107,7 @@ export default function Navbar() {
                 <a href="/industries/b2b-services" className="hover:text-[#00bfff] transition-colors py-1">B2B Services</a>
                 <a href="/industries/healthcare" className="hover:text-[#00bfff] transition-colors py-1">Healthcare</a>
                 <a href="/industries/real-estate" className="hover:text-[#00bfff] transition-colors py-1">Real Estate</a>
-                <a href="/industries/e-commerce" className="hover:text-[#00bfff] transition-colors py-1">E-Commerce</a>
+                <a href="/industries/fashion-retail" className="hover:text-[#00bfff] transition-colors py-1">Fashion & Retail</a>
               </div>
             </details>
 

@@ -5,14 +5,14 @@ export default function IndustriesSection() {
     {
       id: "b2b-services",
       icon: <Wrench className="w-5 h-5 text-[#00bfff]" />,
-      title: "Home Services",
+      title: "B2B Services",
       desc: "Automate leads, bookings and customer support.",
       image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80",
     },
     {
       id: "fashion-retail",
       icon: <ShoppingCart className="w-5 h-5 text-[#00bfff]" />,
-      title: "E-commerce",
+      title: "Fashion & Retail",
       desc: "Boost sales with AI agents and smart automation.",
       image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
     },
@@ -33,7 +33,7 @@ export default function IndustriesSection() {
     {
       id: "finance-insurance",
       icon: <TrendingUp className="w-5 h-5 text-[#00bfff]" />,
-      title: "Finance",
+      title: "Finance & Insurance",
       desc: "Automate workflows and enhance client experience.",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
     },
