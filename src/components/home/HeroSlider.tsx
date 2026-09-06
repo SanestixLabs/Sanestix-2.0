@@ -60,6 +60,34 @@ export default function HeroSlider() {
 
   const slide = slides[currentSlide];
 
+  const heroImage = (
+    <AnimatePresence mode="popLayout">
+      <motion.div
+        key={`img-${currentSlide}`}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 1.05 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="w-full h-full flex items-center justify-center relative z-10"
+      >
+        <img
+          src={isDark ? slide.imageDark : slide.imageLight}
+          alt={slide.rotatingText}
+          className="w-full h-full object-contain"
+          style={{
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 16%, black 84%, transparent 100%)",
+            WebkitMaskComposite: "source-in, source-over",
+            maskImage:
+              "linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 16%, black 84%, transparent 100%)",
+            maskComposite: "intersect",
+          }}
+          loading="eager"
+        />
+      </motion.div>
+    </AnimatePresence>
+  );
+
   return (
     <div className="w-full bg-[#f8f9fa] dark:bg-slate-950 relative overflow-hidden flex flex-col pt-12 pb-24 border-b border-slate-100 dark:border-slate-800 transition-colors duration-300">
       <div className="flex-1 flex flex-col lg:flex-row items-center w-full max-w-[1600px] mx-auto px-6 lg:px-12 xl:px-20 py-4 lg:py-6 gap-8">
@@ -91,6 +119,14 @@ export default function HeroSlider() {
                 </AnimatePresence>
               </div>
             </h1>
+
+            {/* Mobile-only image: sits with the headline, above the description/buttons */}
+            <div className="lg:hidden w-full relative h-[240px] sm:h-[320px] mb-8">
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] aspect-square rounded-full bg-gradient-to-br from-[#00bfff]/20 via-[#00bfff]/8 to-transparent blur-3xl" />
+              </div>
+              {heroImage}
+            </div>
             
             <p className="text-slate-500 dark:text-slate-400 text-base md:text-lg max-w-[480px] mb-8 leading-relaxed min-h-[100px] md:min-h-[90px]">
               {slide.desc}
@@ -128,37 +164,15 @@ export default function HeroSlider() {
           </div>
         </div>
 
-        {/* Right Content (Image) */}
-        <div className="w-full lg:w-[50%] xl:w-[55%] relative flex items-center justify-center lg:justify-end mt-12 lg:mt-0 h-[300px] sm:h-[400px] lg:h-[600px]">
+        {/* Right Content (Image) - desktop only, mobile version sits above with the headline */}
+        <div className="hidden lg:flex w-full lg:w-[50%] xl:w-[55%] relative items-center justify-center lg:justify-end mt-12 lg:mt-0 h-[300px] sm:h-[400px] lg:h-[600px]">
           {/* Ambient glow behind the image, blends the dark artwork into either theme */}
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-1/2 right-[10%] -translate-y-1/2 w-[70%] aspect-square rounded-full bg-gradient-to-br from-[#00bfff]/20 via-[#00bfff]/8 to-transparent blur-3xl" />
           </div>
-          <AnimatePresence mode="popLayout">
-            <motion.div 
-              key={`img-${currentSlide}`}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.05 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="w-full h-full lg:absolute max-w-[750px] flex justify-center lg:justify-end lg:-translate-y-20 xl:-translate-y-24 relative z-10"
-            >
-              <img 
-                src={isDark ? slide.imageDark : slide.imageLight} 
-                alt={slide.rotatingText}
-                className="w-full h-full object-contain"
-                style={{
-                  WebkitMaskImage:
-                    "linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 16%, black 84%, transparent 100%)",
-                  WebkitMaskComposite: "source-in, source-over",
-                  maskImage:
-                    "linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 16%, black 84%, transparent 100%)",
-                  maskComposite: "intersect",
-                }}
-                loading="eager"
-              />
-            </motion.div>
-          </AnimatePresence>
+          <div className="w-full h-full lg:absolute max-w-[750px] flex justify-center lg:justify-end lg:-translate-y-20 xl:-translate-y-24 relative z-10">
+            {heroImage}
+          </div>
         </div>
       </div>
       
