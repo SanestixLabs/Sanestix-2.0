@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TestimonialsSection from '../components/home/Testimonials';
+import BottomCTA from '../components/home/BottomCTA';
+---
+
+<Layout title="Testimonials | Sanestix">
+  <section class="w-full pt-32 pb-10 px-6 lg:px-12 max-w-[1600px] mx-auto flex flex-col justify-center">
+    <div class="max-w-4xl">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-2 h-2 rounded-full bg-[#00bfff]"></div>
+        <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase">CLIENT SUCCESS</span>
+      </div>
+      <h1 class="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-8">
+        Don't just take our word for it.
+      </h1>
+      <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
+        See how Sanestix automation systems are driving measurable ROI and eliminating operational friction for teams around the globe.
+      </p>
+    </div>
+  </section>
+
+  <div class="py-10">
+    <TestimonialsSection client:load />
+  </div>
+
+  <BottomCTA client:load />
+</Layout>

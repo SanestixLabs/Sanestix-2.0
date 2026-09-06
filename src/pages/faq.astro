@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BottomCTA from '../components/home/BottomCTA';
+---
+
+<Layout title="FAQ | Sanestix">
+  <section class="w-full pt-32 pb-20 px-6 lg:px-12 max-w-[1600px] mx-auto min-h-[50vh] flex flex-col justify-center">
+    <div class="max-w-4xl">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-2 h-2 rounded-full bg-[#00bfff]"></div>
+        <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase">FAQ</span>
+      </div>
+      <h1 class="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-8">
+        Frequently Asked Questions
+      </h1>
+      
+      <div class="mt-12 flex flex-col gap-6">
+        <div class="bg-slate-50 dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 transition-colors">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white">How long does implementation take?</h3>
+          <p class="text-slate-600 dark:text-slate-400 mt-2">Most custom automation workflows can be mapped, built, and deployed within 2 to 4 weeks depending on the complexity of the integrations required.</p>
+        </div>
+        <div class="bg-slate-50 dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 transition-colors">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Do I need technical knowledge to use the systems?</h3>
+          <p class="text-slate-600 dark:text-slate-400 mt-2">Not at all. We build automated systems that operate silently in the background or are controlled via simple, user-friendly dashboards.</p>
+        </div>
+        <div class="bg-slate-50 dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 transition-colors">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Is my data secure?</h3>
+          <p class="text-slate-600 dark:text-slate-400 mt-2">Security is our top priority. We use enterprise-grade encryption and ensure all AI integrations are compliant with industry data protection standards like GDPR and HIPAA where applicable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <BottomCTA client:load />
+</Layout>

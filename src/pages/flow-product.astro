@@ -1,0 +1,507 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BottomCTA from '../components/home/BottomCTA';
+import {
+  Bot,
+  Inbox,
+  Workflow,
+  BarChart3,
+  Building2,
+  ShoppingCart,
+  CheckCircle2,
+  Check,
+  Minus,
+  ArrowRight,
+} from 'lucide-react';
+
+const stats = [
+  { value: '500+', label: 'Active businesses' },
+  { value: '90%', label: 'AI resolution rate' },
+  { value: '<2s', label: 'Avg reply time' },
+  { value: '4.9★', label: 'Customer rating' },
+];
+
+const withoutFlow = [
+  'Leads reply after hours — they already bought elsewhere',
+  'Team members reply to the same customer twice',
+  'Zero visibility into who handled what conversation',
+  'Copy-pasting the same replies all day long',
+  'Broadcasts sent manually, one by one',
+];
+
+const withFlow = [
+  'AI replies in seconds — even at 2am on weekends',
+  'Shared inbox — every agent sees the full picture',
+  'Auto assignment, SLA timers and full audit trail',
+  'Canned replies and chatbot flows save hours daily',
+  'Broadcast to 10,000 contacts in under 60 seconds',
+];
+
+const features = [
+  {
+    icon: Bot,
+    title: 'AI Auto-Reply (GPT-4o)',
+    description: 'GPT-4o answers questions 24/7 using your business context. Smart handoff with full context preserved. Pauses when a human takes over.',
+    plan: 'All plans',
+  },
+  {
+    icon: Inbox,
+    title: 'Shared Team Inbox',
+    description: 'Multiple agents, one number. Round-robin assignment, internal notes, SLA timers, and canned responses with a / shortcut.',
+    plan: 'Starter+',
+  },
+  {
+    icon: Workflow,
+    title: 'No-Code Chatbot Builder',
+    description: 'Drag-and-drop visual flow builder. Buttons, conditions, webhooks, and AI handoff nodes — build automation without writing a single line of code.',
+    plan: 'Growth+',
+  },
+  {
+    icon: ShoppingCart,
+    title: 'CRM + Broadcasts',
+    description: 'Contact profiles, tags, segments, custom fields. Send Meta-approved templates to thousands and track delivery, read and reply rates.',
+    plan: 'Starter+',
+  },
+  {
+    icon: BarChart3,
+    title: 'Analytics and CSAT',
+    description: 'KPI dashboard, agent leaderboard, response heatmap. CSAT auto-sent after every resolved conversation with trend tracking.',
+    plan: 'Starter+',
+  },
+  {
+    icon: Building2,
+    title: 'Multi-Workspace White-Label',
+    description: 'The only BSP with true white-label SaaS. Sell Sanestix Flow to your clients under your own brand — custom domain, logo, unlimited workspaces.',
+    plan: 'Enterprise',
+  },
+];
+
+const steps = [
+  {
+    title: 'Create your workspace',
+    description: 'Sign up with your email. Your workspace is ready instantly with a 14-day free trial — no credit card required.',
+  },
+  {
+    title: 'Connect WhatsApp',
+    description: 'Click Connect via Meta — a secure popup guides you through OTP verification in under 2 minutes.',
+  },
+  {
+    title: 'Configure your AI',
+    description: 'Give your AI a name and personality. Upload product catalogs or FAQ docs — the AI uses them to answer accurately.',
+  },
+  {
+    title: 'Invite your team',
+    description: 'Add agents via email invite. Start receiving and replying to WhatsApp messages from the shared dashboard in real-time.',
+  },
+];
+
+const comparison = [
+  { feature: 'AI chatbot (GPT-4o)', flow: 'Full GPT-4o', wati: 'Basic', interakt: 'Basic' },
+  { feature: 'Shared team inbox', flow: true, wati: true, interakt: true },
+  { feature: 'No-code chatbot builder', flow: true, wati: true, interakt: false },
+  { feature: 'Multi-workspace SaaS', flow: true, wati: false, interakt: false },
+  { feature: 'White-label custom domain', flow: true, wati: false, interakt: false },
+  { feature: 'Voice note AI transcription', flow: true, wati: false, interakt: false },
+  { feature: 'Open REST API and webhooks', flow: true, wati: true, interakt: false },
+];
+
+const integrations = [
+  { name: 'Shopify', category: 'E-commerce', type: 'Native' },
+  { name: 'HubSpot', category: 'CRM', type: 'Native' },
+  { name: 'Zapier', category: 'Automation', type: 'Native' },
+  { name: 'Stripe', category: 'Payments', type: 'Native' },
+  { name: 'Zoho CRM', category: 'CRM', type: 'Native' },
+  { name: 'Google Sheets', category: 'Spreadsheet', type: 'Native' },
+  { name: 'WooCommerce', category: 'E-commerce', type: 'Webhook' },
+  { name: 'Razorpay', category: 'Payments', type: 'Native' },
+  { name: 'Salesforce', category: 'CRM', type: 'Webhook' },
+  { name: 'JazzCash', category: 'Payments PK', type: 'Webhook' },
+  { name: 'Make', category: 'Automation', type: 'Native' },
+  { name: 'Meta CTWA', category: 'Ads Tracking', type: 'Native' },
+];
+
+const pricing = [
+  {
+    tier: 'Tier 0',
+    name: 'Free Trial',
+    price: '$0',
+    cadence: '14 days · no credit card needed',
+    features: ['1 WA number · 2 agents', '500 messages', 'AI auto-reply', 'No broadcasts', 'No chatbot builder'],
+    cta: 'Start free trial',
+    popular: false,
+  },
+  {
+    tier: 'Tier 1',
+    name: 'Starter',
+    price: '$29',
+    cadence: 'billed monthly',
+    features: ['1 WA number · 3 agents', '2,000 messages/mo', 'Broadcasts and CRM', 'Analytics and CSAT', 'No chatbot builder'],
+    cta: 'Get started',
+    popular: false,
+  },
+  {
+    tier: 'Tier 2',
+    name: 'Growth',
+    price: '$79',
+    cadence: 'billed monthly',
+    features: ['1 WA number · 10 agents', '10,000 messages/mo', 'Chatbot flow builder', 'Shopify integration', 'Full analytics and CSAT'],
+    cta: 'Start free trial',
+    popular: true,
+  },
+  {
+    tier: 'Tier 3',
+    name: 'Enterprise',
+    price: '$199',
+    cadence: 'white-label · billed monthly',
+    features: ['Unlimited workspaces', 'Custom domain and logo', 'All integrations and API', 'SLA and dedicated support'],
+    cta: 'Contact sales',
+    popular: false,
+  },
+];
+
+const testimonials = [
+  {
+    quote: 'We went from 3 staff replying manually to AI handling 90% of queries automatically. Response time dropped from 20 minutes to under 30 seconds.',
+    name: 'Ahmed Khan',
+    role: 'Founder, KK Bakery — Karachi',
+    initials: 'AK',
+  },
+  {
+    quote: 'The white-label feature sold us immediately. We now resell Sanestix Flow to 12 clients under our own brand — recurring revenue we did not have before.',
+    name: 'Sara Raza',
+    role: 'CEO, DigitalFirst Agency — Lahore',
+    initials: 'SR',
+  },
+  {
+    quote: 'Appointment booking via WhatsApp was a nightmare. Now the AI handles it 24/7, patients get reminders automatically, and our receptionist focuses on real work.',
+    name: 'Dr. Omar Malik',
+    role: 'LifeCare Clinic — Islamabad',
+    initials: 'OM',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Does it work with my existing WhatsApp number?',
+    a: 'Yes — connect any WhatsApp Business number via Meta Embedded Signup. The process takes under 5 minutes and requires no manual configuration from your side.',
+  },
+  {
+    q: 'What happens if the AI gives a wrong answer?',
+    a: 'You set a confidence threshold. Below it, the AI auto-routes to a human agent. Agents give thumbs up or down on AI replies — feeding into a continuous improvement loop.',
+  },
+  {
+    q: 'Is my customer data safe?',
+    a: 'All data is encrypted at rest and in transit. Workspace data is fully isolated. GDPR tools, data export, right-to-erasure, and detailed audit trails are built-in.',
+  },
+  {
+    q: 'Can I resell this to my own clients?',
+    a: 'Yes — the Enterprise plan includes unlimited workspaces with your own branding, custom domain, and logo. You set your own pricing and keep the margin.',
+  },
+  {
+    q: 'Do you charge per WhatsApp message?',
+    a: 'We do not charge per message beyond your plan limit. Meta own conversation-based charges apply separately — these are set by Meta, not us.',
+  },
+];
+---
+
+<Layout title="Sanestix Flow — WhatsApp Business Platform | Sanestix">
+
+  <!-- Hero -->
+  <section class="w-full pt-32 pb-16 px-6 lg:px-12 max-w-[1600px] mx-auto">
+    <div class="max-w-4xl">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-2 h-2 rounded-full bg-[#00bfff]"></div>
+        <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase">Official Meta BSP · WhatsApp Cloud API</span>
+      </div>
+      <h1 class="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-8">
+        Every WhatsApp conversation. Handled automatically.
+      </h1>
+      <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed mb-10">
+        AI auto-replies in seconds, a shared team inbox with smart assignment, and a no-code chatbot builder — the complete WhatsApp Business Platform for teams that can't afford to miss a message.
+      </p>
+
+      <div class="flex flex-wrap gap-4 mb-6">
+        <a href="https://flow.sanestix.com/app/signup" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#0a0f1c] hover:bg-black text-white dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 font-bold py-4 px-8 rounded-xl shadow-lg transition-all hover:-translate-y-0.5">
+          Start free trial
+          <ArrowRight className="w-5 h-5" />
+        </a>
+        <a href="#how" class="inline-flex items-center gap-2 bg-transparent border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white font-bold py-4 px-8 rounded-xl transition-all hover:bg-slate-50 dark:hover:bg-slate-900">
+          See how it works
+        </a>
+      </div>
+
+      <p class="text-sm text-slate-500 dark:text-slate-500">
+        No credit card required · 14-day free trial · Cancel anytime
+      </p>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-10 border-t border-slate-100 dark:border-slate-800">
+      {stats.map((stat) => (
+        <div>
+          <div class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-1">{stat.value}</div>
+          <div class="text-sm text-slate-500 dark:text-slate-400">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- The Problem -->
+  <section class="w-full py-20 px-6 lg:px-12 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-100 dark:border-slate-800 transition-colors">
+    <div class="max-w-[1600px] mx-auto">
+      <div class="max-w-3xl mb-16">
+        <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase mb-4 block">The Problem</span>
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white leading-tight">
+          WhatsApp is your biggest sales channel. But it's chaos without the right tools.
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800">
+          <h3 class="text-lg font-bold text-slate-400 dark:text-slate-500 mb-6">Without Sanestix Flow</h3>
+          <ul class="space-y-4">
+            {withoutFlow.map((item) => (
+              <li class="flex items-start gap-3">
+                <Minus className="w-5 h-5 text-slate-300 dark:text-slate-600 mt-0.5 shrink-0" />
+                <span class="text-slate-500 dark:text-slate-400">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border-2 border-[#00bfff]/30 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-6">With Sanestix Flow</h3>
+          <ul class="space-y-4">
+            {withFlow.map((item) => (
+              <li class="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-[#00bfff] mt-0.5 shrink-0" />
+                <span class="text-slate-700 dark:text-slate-300 font-medium">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Features -->
+  <section id="features" class="w-full py-24 px-6 lg:px-12 max-w-[1600px] mx-auto">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase mb-4 block">Platform Features</span>
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">Everything on WhatsApp, in one platform</h2>
+      <p class="text-lg text-slate-500 dark:text-slate-400">From AI auto-reply to product catalogs — the full BSP stack that WATI and Interakt charge extra for.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {features.map((feature) => (
+        <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm dark:shadow-none flex flex-col gap-4 transition-colors">
+          <div class="flex items-center justify-between">
+            <div class="w-12 h-12 rounded-2xl bg-[#00bfff]/10 flex items-center justify-center">
+              <feature.icon className="w-6 h-6 text-[#00bfff]" />
+            </div>
+            <span class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wide">{feature.plan}</span>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white">{feature.title}</h3>
+          <p class="text-slate-600 dark:text-slate-400 leading-relaxed">{feature.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="w-full py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-100 dark:border-slate-800 transition-colors">
+    <div class="max-w-[1600px] mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase mb-4 block">Setup and Flow</span>
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">Live in 5 minutes, not 5 days</h2>
+        <p class="text-lg text-slate-500 dark:text-slate-400">Connect via Meta official embedded signup — no manual configuration, no developer needed.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {steps.map((step, i) => (
+          <div class="relative">
+            <div class="w-10 h-10 rounded-full bg-[#0a0f1c] dark:bg-white text-white dark:text-slate-900 font-bold flex items-center justify-center mb-6">
+              {i + 1}
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">{step.title}</h3>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Competitive Edge -->
+  <section class="w-full py-24 px-6 lg:px-12 max-w-[1600px] mx-auto">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase mb-4 block">Competitive Edge</span>
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">Sanestix vs the competition</h2>
+      <p class="text-lg text-slate-500 dark:text-slate-400">The only BSP with true multi-workspace white-label SaaS — your moat against WATI and Interakt.</p>
+    </div>
+    <div class="overflow-x-auto rounded-2xl border border-slate-100 dark:border-slate-800">
+      <table class="w-full min-w-[640px] border-collapse bg-white dark:bg-slate-900">
+        <thead>
+          <tr class="border-b border-slate-100 dark:border-slate-800">
+            <th class="text-left py-5 px-6 text-sm font-bold text-slate-500 dark:text-slate-400">Feature</th>
+            <th class="text-center py-5 px-6 text-sm font-bold text-[#00bfff]">Sanestix Flow</th>
+            <th class="text-center py-5 px-6 text-sm font-bold text-slate-500 dark:text-slate-400">WATI</th>
+            <th class="text-center py-5 px-6 text-sm font-bold text-slate-500 dark:text-slate-400">Interakt</th>
+          </tr>
+        </thead>
+        <tbody>
+          {comparison.map((row) => (
+            <tr class="border-b border-slate-50 dark:border-slate-800/60 last:border-b-0">
+              <td class="py-5 px-6 text-slate-700 dark:text-slate-300 font-medium">{row.feature}</td>
+              <td class="py-5 px-6 text-center">
+                {typeof row.flow === 'string' ? (
+                  <span class="text-sm font-bold text-slate-900 dark:text-white">{row.flow}</span>
+                ) : row.flow ? (
+                  <Check className="w-5 h-5 text-[#00bfff] mx-auto" />
+                ) : (
+                  <Minus className="w-5 h-5 text-slate-300 dark:text-slate-700 mx-auto" />
+                )}
+              </td>
+              <td class="py-5 px-6 text-center">
+                {typeof row.wati === 'string' ? (
+                  <span class="text-sm text-slate-500 dark:text-slate-400">{row.wati}</span>
+                ) : row.wati ? (
+                  <Check className="w-5 h-5 text-slate-400 dark:text-slate-500 mx-auto" />
+                ) : (
+                  <Minus className="w-5 h-5 text-slate-300 dark:text-slate-700 mx-auto" />
+                )}
+              </td>
+              <td class="py-5 px-6 text-center">
+                {typeof row.interakt === 'string' ? (
+                  <span class="text-sm text-slate-500 dark:text-slate-400">{row.interakt}</span>
+                ) : row.interakt ? (
+                  <Check className="w-5 h-5 text-slate-400 dark:text-slate-500 mx-auto" />
+                ) : (
+                  <Minus className="w-5 h-5 text-slate-300 dark:text-slate-700 mx-auto" />
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Integrations -->
+  <section id="integrations" class="w-full py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-100 dark:border-slate-800 transition-colors">
+    <div class="max-w-[1600px] mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase mb-4 block">Integration Hub</span>
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">Connects to your stack</h2>
+        <p class="text-lg text-slate-500 dark:text-slate-400">Native integrations with e-commerce, CRM, payments, and automation tools. Plus a public REST API for custom builds.</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        {integrations.map((integration) => (
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 flex flex-col gap-1">
+            <span class="text-base font-bold text-slate-900 dark:text-white">{integration.name}</span>
+            <span class="text-sm text-slate-500 dark:text-slate-400">{integration.category}</span>
+            <span class="mt-3 inline-flex w-fit text-xs font-bold uppercase tracking-wide text-[#00bfff] bg-[#00bfff]/10 px-2.5 py-1 rounded-full">{integration.type}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="w-full py-24 px-6 lg:px-12 max-w-[1600px] mx-auto">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase mb-4 block">Transparent Pricing</span>
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">Start free, scale as you grow</h2>
+      <p class="text-lg text-slate-500 dark:text-slate-400">No hidden fees. No per-message charges beyond your plan. Cancel anytime.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {pricing.map((plan) => (
+        <div class={`relative flex flex-col p-8 rounded-2xl border transition-colors ${plan.popular ? 'border-[#00bfff] bg-white dark:bg-slate-900 shadow-[0_20px_40px_rgb(0,0,0,0.08)] lg:-translate-y-3' : 'border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900'}`}>
+          {plan.popular && (
+            <span class="absolute -top-3 left-8 bg-[#00bfff] text-white text-xs font-bold uppercase tracking-wide px-3 py-1 rounded-full">Most Popular</span>
+          )}
+          <span class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wide mb-3">{plan.tier}</span>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-1">{plan.name}</h3>
+          <div class="flex items-baseline gap-1 mb-1">
+            <span class="text-4xl font-bold text-slate-900 dark:text-white">{plan.price}</span>
+            <span class="text-slate-500 dark:text-slate-400">/mo</span>
+          </div>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-8">{plan.cadence}</p>
+          <ul class="space-y-3 mb-10 flex-1">
+            {plan.features.map((f) => (
+              <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400">
+                <CheckCircle2 className="w-4 h-4 text-[#00bfff] mt-0.5 shrink-0" />
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+          <a href="https://flow.sanestix.com/app/signup" target="_blank" rel="noopener noreferrer" class={`w-full text-center font-bold py-3.5 rounded-xl transition-all ${plan.popular ? 'bg-[#0a0f1c] hover:bg-black text-white dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200' : 'bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-700'}`}>
+            {plan.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="w-full py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-100 dark:border-slate-800 transition-colors">
+    <div class="max-w-[1600px] mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase mb-4 block">Customer Stories</span>
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">Businesses scaling on WhatsApp</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {testimonials.map((t) => (
+          <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 flex flex-col gap-6">
+            <span class="text-[#00bfff] text-lg tracking-widest">★★★★★</span>
+            <p class="text-slate-700 dark:text-slate-300 leading-relaxed flex-1">{t.quote}</p>
+            <div class="flex items-center gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <div class="w-10 h-10 rounded-full bg-[#00bfff]/10 text-[#00bfff] font-bold flex items-center justify-center text-sm shrink-0">
+                {t.initials}
+              </div>
+              <div>
+                <div class="font-bold text-slate-900 dark:text-white text-sm">{t.name}</div>
+                <div class="text-slate-500 dark:text-slate-400 text-sm">{t.role}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="w-full py-24 px-6 lg:px-12 max-w-[1600px] mx-auto">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase mb-4 block">FAQ</span>
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">Common questions</h2>
+      </div>
+      <div class="flex flex-col gap-6">
+        {faqs.map((item) => (
+          <div class="bg-slate-50 dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 transition-colors">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">{item.q}</h3>
+            <p class="text-slate-600 dark:text-slate-400 mt-2">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Ready to automate -->
+  <section class="w-full py-20 px-6 lg:px-12 max-w-[1600px] mx-auto">
+    <div class="bg-[#0a0f1c] dark:bg-slate-900 rounded-[2rem] p-12 md:p-16 text-center max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to automate your WhatsApp?</h2>
+      <p class="text-slate-300 dark:text-slate-400 max-w-2xl mx-auto mb-10">
+        Join businesses across Pakistan and the Middle East handling thousands of WhatsApp conversations daily — on autopilot.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 mb-6">
+        <a href="https://flow.sanestix.com/app/signup" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-slate-900 font-bold py-4 px-8 rounded-xl shadow-lg transition-all hover:-translate-y-0.5">
+          Start free trial
+          <ArrowRight className="w-5 h-5" />
+        </a>
+        <a href="https://flow.sanestix.com/app/login" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-transparent border border-white/20 text-white font-bold py-4 px-8 rounded-xl transition-all hover:bg-white/10">
+          Sign in to dashboard
+        </a>
+      </div>
+      <p class="text-sm text-slate-400">No credit card required · Setup in 5 minutes · Cancel anytime</p>
+    </div>
+  </section>
+
+  <BottomCTA client:load />
+</Layout>

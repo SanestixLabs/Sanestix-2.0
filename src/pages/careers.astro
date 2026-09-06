@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BottomCTA from '../components/home/BottomCTA';
+import { ArrowRight } from 'lucide-react';
+---
+
+<Layout title="Careers | Sanestix">
+  <section class="w-full pt-32 pb-20 px-6 lg:px-12 max-w-[1600px] mx-auto min-h-[50vh] flex flex-col justify-center">
+    <div class="max-w-4xl">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-2 h-2 rounded-full bg-[#00bfff]"></div>
+        <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase">CAREERS</span>
+      </div>
+      <h1 class="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-8">
+        Join the automation revolution.
+      </h1>
+      <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed mb-12">
+        We are always looking for elite engineers, workflow architects, and growth experts to join our globally distributed team.
+      </p>
+    </div>
+
+    <div class="mt-10 flex flex-col gap-4 max-w-4xl">
+      {[
+        { title: 'Senior AI Engineer', dept: 'Engineering', loc: 'Remote' },
+        { title: 'Workflow Automation Architect', dept: 'Solutions', loc: 'Remote' },
+        { title: 'Growth Marketing Manager', dept: 'Marketing', loc: 'San Francisco / Remote' }
+      ].map(job => (
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-xl flex items-center justify-between hover:border-[#00bfff] transition-colors cursor-pointer group">
+          <div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">{job.title}</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">{job.dept} • {job.loc}</p>
+          </div>
+          <ArrowRight class="w-5 h-5 text-slate-400 dark:text-slate-500 group-hover:text-[#00bfff] transition-colors" />
+        </div>
+      ))}
+    </div>
+  </section>
+  <BottomCTA client:load />
+</Layout>

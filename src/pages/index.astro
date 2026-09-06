@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSlider from "../components/home/HeroSlider";
+import TrustedBy from "../components/home/TrustedBy";
+import FeaturesRow from "../components/home/FeaturesRow";
+import IndustriesSection from "../components/home/IndustriesSection";
+import ChatbotSection from "../components/home/ChatbotSection";
+import HowItWorks from "../components/home/HowItWorks";
+import CaseStudy from "../components/home/CaseStudy";
+import Testimonials from "../components/home/Testimonials";
+import BottomCTA from "../components/home/BottomCTA";
+---
+
+<Layout>
+  <HeroSlider client:load />
+  <TrustedBy client:load />
+  <FeaturesRow client:load />
+  <IndustriesSection client:load />
+  <ChatbotSection client:load />
+  <HowItWorks client:load />
+  <CaseStudy client:load />
+  <Testimonials client:load />
+  <BottomCTA client:load />
+</Layout>

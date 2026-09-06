@@ -1,0 +1,588 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { services } from '../../data/services';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import BottomCTA from '../../components/home/BottomCTA';
+
+export function getStaticPaths() {
+  return services.map(service => ({
+    params: { slug: service.id },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+
+const imageMap: Record<string, string> = {
+  'Generative & Agentic AI': '/hero1.png',
+  'Software Development': '/hero5.jpg',
+  'Mobile App Development': '/hero3.jpg',
+  'Web Development': '/hero2.jpg',
+  'Automation Solutions': '/hero4.png'
+};
+
+let heroImage = imageMap[service.category] || '/hero1.png';
+let secondaryImage = heroImage === '/hero1.png' ? '/hero3.jpg' : '/hero1.png';
+
+if (service.id === 'ai-calling-agent') {
+  heroImage = '/calling-hero.png';
+  secondaryImage = '/calling-architecture.jpg';
+} else if (service.id === 'ai-automation') {
+  heroImage = '/automation-hero.png';
+  secondaryImage = '/automation-architecture.png';
+} else if (service.id === 'ai-website-development') {
+  heroImage = '/ai-web-dev-hero.png';
+  secondaryImage = '/ai-web-dev-architecture.jpg';
+} else if (service.id === 'smart-chatbot-integration') {
+  heroImage = '/chatbot-hero.png';
+  secondaryImage = '/chatbot-architecture.png';
+} else if (service.id === 'whatsapp-automation') {
+  heroImage = '/whatsapp-hero.jpg';
+  secondaryImage = '/whatsapp-architecture.jpg';
+} else if (service.id === 'instagram-automation') {
+  heroImage = '/instagram-hero.jpg';
+  secondaryImage = '/instagram-architecture.jpg';
+} else if (service.id === 'crm-integration') {
+  heroImage = '/crm-hero.png';
+  secondaryImage = '/crm-architecture.jpg';
+} else if (service.id === 'e-commerce-automation') {
+  heroImage = '/ecommerce-hero.png';
+  secondaryImage = '/ecommerce-architecture.jpg';
+} else if (service.id === 'custom-ai-development') {
+  heroImage = '/custom-ai-hero.jpg';
+  secondaryImage = '/custom-ai-architecture.jpg';
+} else if (service.id === 'machine-learning-solutions') {
+  heroImage = '/ml-hero.png';
+  secondaryImage = '/ml-architecture.png';
+} else if (service.id === 'computer-vision') {
+  heroImage = '/cv-hero.jpg';
+  secondaryImage = '/cv-architecture.jpg';
+} else if (service.id === 'ai-integration-services') {
+  heroImage = '/ai-integration-hero.jpg';
+  secondaryImage = '/ai-integration-architecture.jpg';
+} else if (service.id === 'android-application') {
+  heroImage = '/android-hero.png';
+  secondaryImage = '/android-architecture.png';
+} else if (service.id === 'ios-application') {
+  heroImage = '/ios-hero.png';
+  secondaryImage = '/ios-architecture.png';
+} else if (service.id === 'cross-platform-apps') {
+  heroImage = '/cross-hero.png';
+  secondaryImage = '/cross-architecture.jpg';
+} else if (service.id === 'flutter-development') {
+  heroImage = '/flutter-hero.jpg';
+  secondaryImage = '/flutter-architecture.jpg';
+} else if (service.id === 'generative-ai-development') {
+  heroImage = '/genai-hero.jpg';
+  secondaryImage = '/genai-architecture.jpg';
+} else if (service.id === 'ai-agents') {
+  heroImage = '/agents-hero.jpg';
+  secondaryImage = '/agents-architecture.jpg';
+} else if (service.id === 'llm-integration') {
+  heroImage = '/llm-hero.jpg';
+  secondaryImage = '/llm-architecture.jpg';
+} else if (service.id === 'rag-knowledge-systems') {
+  heroImage = '/rag-hero.png';
+  secondaryImage = '/rag-architecture.jpg';
+} else if (service.id === 'custom-websites') {
+  heroImage = '/websites-hero.jpg';
+  secondaryImage = '/websites-architecture.jpg';
+} else if (service.id === 'wordpress-development') {
+  heroImage = '/wordpress-hero.jpg';
+  secondaryImage = '/wordpress-architecture.jpg';
+} else if (service.id === 'shopify-development') {
+  heroImage = '/shopify-hero.jpg';
+  secondaryImage = '/shopify-architecture.jpg';
+} else if (service.id === 'web-application-development') {
+  heroImage = '/webapp-hero.jpg';
+  secondaryImage = '/webapp-architecture.png';
+} else if (service.id === 'custom-software-development') {
+  heroImage = '/custom-software-hero.jpg';
+  secondaryImage = '/custom-software-architecture.jpg';
+} else if (service.id === 'saas-development') {
+  heroImage = '/saas-hero.jpg';
+  secondaryImage = '/saas-architecture.jpg';
+} else if (service.id === 'mvp-development') {
+  heroImage = '/mvp-hero.jpg';
+  secondaryImage = '/mvp-architecture.jpg';
+} else if (service.id === 'legacy-application-modernization') {
+  heroImage = '/legacy-hero.jpg';
+  secondaryImage = '/legacy-architecture.jpg';
+} else if (service.id === 'lead-generation-systems') {
+  heroImage = '/leadgen-hero.jpg';
+  secondaryImage = '/leadgen-architecture.jpg';
+} else if (service.id === 'custom-workflows') {
+  heroImage = '/custom-workflows-hero.jpg';
+  secondaryImage = '/custom-workflows-architecture.jpg';
+}
+---
+
+<Layout title={`${service.title} | Sanestix Services`}>
+  
+  <section class="w-full pt-12 pb-20 px-6 lg:px-12 max-w-[1600px] mx-auto">
+    <div class="flex flex-col lg:flex-row items-center gap-16">
+      <div class="w-full lg:w-1/2">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-2 h-2 rounded-full bg-[#00bfff]"></div>
+          <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase">{service.category}</span>
+        </div>
+        <h1 class="text-5xl md:text-6xl lg:text-[72px] font-bold text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-8">
+          <span class="text-[#00bfff]">{service.title}</span>.
+        </h1>
+        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed mb-12">
+          {service.description}
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/contact">
+            <button class="bg-[#0a0f1c] hover:bg-black text-white rounded-xl px-8 h-14 text-base font-medium flex items-center gap-2 shadow-lg transition-all hover:shadow-xl hover:-translate-y-0.5">
+              Discuss this service <ArrowRight class="w-5 h-5 text-white/70" />
+            </button>
+          </a>
+        </div>
+      </div>
+      <div class="w-full lg:w-1/2 relative flex justify-center lg:justify-end">
+        <div class="relative w-full max-w-[700px] flex justify-center lg:justify-end">
+          <img src={heroImage} alt={`${service.title} Service`} class="w-full h-auto object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-8 dark:rounded-[3rem] transform hover:scale-105 transition-all duration-700 ease-out" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-900 border-y border-slate-100 dark:border-slate-800 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#0000000a_1px,transparent_1px),linear-gradient(to_bottom,#0000000a_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+    <div class="max-w-[1600px] mx-auto relative z-10">
+      <div class="text-center mb-16 max-w-3xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">Key Benefits</h2>
+        <p class="text-lg text-slate-500 dark:text-slate-400">Discover how our {service.title.toLowerCase()} capabilities can transform your workflow and increase efficiency.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {service.benefits.map((benefit: string) => (
+          <div class="bg-white dark:bg-slate-900 p-10 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 flex items-start gap-5 hover:-translate-y-1">
+            <div class="w-12 h-12 rounded-2xl bg-[#00bfff]/10 dark:bg-[#00bfff]/20 flex items-center justify-center shrink-0">
+              <CheckCircle2 class="w-6 h-6 text-[#00bfff]" />
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">{benefit}</h3>
+              <p class="text-slate-500 dark:text-slate-400 leading-relaxed">Integrated seamlessly into your existing workflows and technical infrastructure for maximum impact.</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full py-24 px-6 lg:px-12 max-w-[1600px] mx-auto">
+    <div class="flex flex-col-reverse lg:flex-row items-center gap-16">
+      <div class="w-full lg:w-1/2 relative flex justify-center lg:justify-start">
+        <div class="relative w-full max-w-[700px]">
+          <div class="absolute inset-0 bg-[#00bfff]/10 rounded-[2rem] transform translate-x-4 translate-y-4"></div>
+          <img src={secondaryImage} alt="Delivery and Execution" class="relative w-full h-auto object-cover rounded-[2rem] shadow-xl z-10 dark:bg-white dark:p-6" />
+        </div>
+      </div>
+      <div class="w-full lg:w-1/2">
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+          {service.id === 'ai-calling-agent' 
+            ? 'Orchestrated for zero-latency conversations.' 
+            : service.id === 'ai-automation'
+              ? 'The nervous system of your business.'
+              : service.id === 'ai-website-development'
+                ? 'Your idea. We build it smarter.'
+                : service.id === 'smart-chatbot-integration'
+                  ? 'One smart bot. Every channel.'
+                  : service.id === 'whatsapp-automation'
+                    ? 'Your business on WhatsApp autopilot.'
+                    : service.id === 'instagram-automation'
+                      ? 'Turn followers into customers, instantly.'
+                      : service.id === 'crm-integration'
+                        ? 'All your leads. One CRM.'
+                        : service.id === 'e-commerce-automation'
+                          ? 'Automate your store. Sell without limits.'
+                          : service.id === 'custom-ai-development'
+                            ? 'Your business. Your AI solution.'
+                            : service.id === 'machine-learning-solutions'
+                              ? 'Turn raw data into predictive power.'
+                              : service.id === 'computer-vision'
+                                ? 'See, Understand, Automate.'
+                                : service.id === 'ai-integration-services'
+                                  ? 'Connect your tools. Unlock possibilities.'
+                                  : service.id === 'android-application'
+                                    ? 'A Smarter App Experience.'
+                                    : service.id === 'ios-application'
+                                      ? 'Flawless Apple Experiences.'
+                                      : service.id === 'cross-platform-apps'
+                                        ? 'One App. Every Platform.'
+                                        : service.id === 'flutter-development'
+                                          ? 'Build Once. Run Everywhere.'
+                                          : service.id === 'generative-ai-development'
+                                            ? 'From Ideas to Intelligence.'
+                                            : service.id === 'ai-agents'
+                                              ? 'Your autonomous digital workforce.'
+                                              : service.id === 'llm-integration'
+                                                ? 'Intelligence embedded securely.'
+                                                : service.id === 'rag-knowledge-systems'
+                                                  ? 'Ground your AI in reality.'
+                                                  : service.id === 'custom-websites'
+                                                    ? 'Digital experiences that convert.'
+                                                    : service.id === 'wordpress-development'
+                                                      ? 'Powerful features. Endless possibilities.'
+                                                      : service.id === 'shopify-development'
+                                                        ? 'Build. Customize. Scale.'
+                                                        : service.id === 'web-application-development'
+                                                          ? 'Complex Logic. Elegant Interfaces.'
+                                                          : service.id === 'custom-software-development'
+                                                            ? 'Your logic. Encoded perfectly.'
+                                                            : service.id === 'saas-development'
+                                                              ? 'Build. Launch. Scale Globally.'
+                                                              : service.id === 'mvp-development'
+                                                                ? 'Test fast. Iterate faster.'
+                                                                : service.id === 'legacy-application-modernization'
+                                                                  ? 'Revitalize your legacy systems.'
+                                                                  : service.id === 'lead-generation-systems'
+                                                                    ? 'Your automated growth engine.'
+                                                                    : service.id === 'custom-workflows'
+                                                                      ? 'Built for your unique logic.'
+                                                                      : service.category.includes('AI') 
+                                                                        ? 'Architecting your proprietary intelligence.' 
+                                                                        : 'Built for scale, engineered for reliability.'}
+        </h2>
+        <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
+          {service.id === 'ai-calling-agent'
+            ? 'A realistic voice agent requires more than just a text-to-speech API. We orchestrate a complex architecture of low-latency transcription, intent classification, and real-time synthesis to ensure fluid, interruptible, and human-like conversations.'
+            : service.id === 'ai-automation'
+              ? 'True automation connects disjointed software silos into a singular, flowing pipeline. From parsing unstructured emails and form submissions to executing multi-step CRM updates and triggering alerts, we build robust integrations that never sleep.'
+              : service.id === 'ai-website-development'
+                ? 'By augmenting our top-tier engineering talent with advanced AI coding workflows, we radically compress development timelines. We generate UI/UX designs, write clean code, and execute automated QA testing faster than traditional agencies.'
+                : service.id === 'smart-chatbot-integration'
+                  ? 'Stop managing five different inboxes. We deploy a unified, context-aware AI architecture that interfaces simultaneously with your website, WhatsApp, Instagram, Messenger, and Email, ensuring a cohesive brand voice everywhere.'
+                  : service.id === 'whatsapp-automation'
+                    ? 'Stop manually answering the same questions and manually logging leads. We integrate directly into the Official WhatsApp API to build conversational funnels that capture leads, answer complex FAQs via AI, and qualify prospects instantly.'
+                    : service.id === 'instagram-automation'
+                      ? 'When a user comments on your reel or mentions you in their story, every second counts. We build intelligent automation flows that instantly reply, send customized DMs, and seamlessly guide high-intent followers toward booking a call or making a purchase.'
+                      : service.id === 'crm-integration'
+                        ? 'Your sales team should be closing deals, not copying and pasting data. We architect seamless integrations that automatically capture, sync, and manage leads from all your inbound channels—funneling them into one powerful, unified CRM.'
+                        : service.id === 'e-commerce-automation'
+                          ? 'Selling across multiple channels shouldn\'t mean multiplying your manual work. We build custom automation engines that connect Shopify, WooCommerce, Amazon, and Etsy into one centralized control center.'
+                          : service.id === 'custom-ai-development'
+                            ? 'Off-the-shelf AI tools often fall short when applied to unique business logic. We design and build bespoke AI models, intelligent agents, and automated workflows perfectly tailored to how your business actually operates.'
+                            : service.id === 'machine-learning-solutions'
+                              ? 'Data is useless if it just sits in a database. We architect robust machine learning pipelines that continuously ingest data from your CRMs, documents, APIs, and web analytics to extract hidden, actionable insights.'
+                              : service.id === 'computer-vision'
+                                ? 'We give your infrastructure the power of sight. By deploying advanced neural networks, we process video streams from CCTV, drone feeds, and mobile devices in real time to detect, classify, and track critical objects instantly.'
+                                : service.id === 'ai-integration-services'
+                                  ? 'You don\'t need to rip and replace your entire software stack to benefit from AI. We engineer intelligent middleware that sits between your existing tools—like Salesforce, Google Workspace, Slack, and Shopify—to create frictionless, automated workflows.'
+                                  : service.id === 'android-application'
+                                    ? 'A successful Android app demands more than just writing code. We focus on modern UI/UX design, custom backend development, and scalable architecture to ensure your application stands out in a crowded marketplace.'
+                                    : service.id === 'ios-application'
+                                      ? 'Apple users expect perfection. We build beautiful, high-performance iOS applications using Swift and SwiftUI that adhere to Apple\'s strict Human Interface Guidelines and integrate deeply with the Apple ecosystem.'
+                                      : service.id === 'cross-platform-apps'
+                                        ? 'Why build the same app twice? We utilize advanced frameworks like React Native and Flutter to write a single, unified codebase that deploys natively across iOS, Android, Windows, and the Web simultaneously.'
+                                        : service.id === 'flutter-development'
+                                          ? 'Forget the trade-offs between speed and performance. We utilize Google\'s Flutter framework to write a single, clean Dart codebase that compiles directly to native ARM code for iOS, Android, Web, and desktop.'
+                                          : service.id === 'generative-ai-development'
+                                            ? 'The AI revolution is here, but generic models aren\'t enough to give you a competitive edge. We build bespoke generative architectures that transform how you create text, code, images, and video by aligning cutting-edge models perfectly with your brand.'
+                                            : service.id === 'ai-agents'
+                                              ? 'Stop doing repetitive tasks manually. We architect highly capable, goal-oriented AI agents that act autonomously. They can read emails, query databases, message your team on Slack, and update your Notion workspace without human intervention.'
+                                              : service.id === 'llm-integration'
+                                                ? 'Off-the-shelf ChatGPT cannot access your private data. We securely integrate industry-leading foundation models (OpenAI, Anthropic, open-source) directly into your software applications, wrapped in strict privacy boundaries.'
+                                                : service.id === 'rag-knowledge-systems'
+                                                  ? 'LLMs are prone to confidently hallucinating false information when asked about proprietary data. We solve this by engineering advanced Retrieval-Augmented Generation (RAG) pipelines that force the AI to search your actual databases before answering.'
+                                                  : service.id === 'custom-websites'
+                                                    ? 'Your website is often the first impression a customer has of your business. We design and develop custom websites that aren’t just visually stunning, but mathematically engineered to load in milliseconds and rank at the top of Google.'
+                                                    : service.id === 'wordpress-development'
+                                                      ? 'We push WordPress beyond its standard limits. Whether you need a complex WooCommerce store, a custom Elementor setup, or bespoke plugin development, we build highly scalable, completely customized solutions.'
+                                                      : service.id === 'shopify-development'
+                                                        ? 'Generic Shopify templates limit your growth. We engineer completely bespoke Shopify storefronts using customized Liquid code and the Storefront API, creating a unique shopping experience that perfectly reflects your brand.'
+                                                        : service.id === 'web-application-development'
+                                                          ? 'Static websites aren\'t enough for modern businesses. We architect complex, dynamic web applications—from internal B2B portals and CRM dashboards to scalable SaaS platforms serving millions of users.'
+                                                          : service.id === 'custom-software-development'
+                                                            ? 'Off-the-shelf software forces you to change how your business operates. We do the exact opposite. We build bespoke, full-stack software solutions designed from the ground up to perfectly map your existing operational workflows.'
+                                                            : service.id === 'saas-development'
+                                                              ? 'Building a SaaS platform requires a fundamentally different engineering approach than a standard web app. We architect robust, multi-tenant infrastructures that isolate customer data securely while sharing core resources efficiently.'
+                                                              : service.id === 'mvp-development'
+                                                                ? 'The biggest mistake startups make is building too much before validating the market. We enforce strict lean methodologies to distill your grand vision down to the core features that actually prove your hypothesis.'
+                                                                : service.id === 'legacy-application-modernization'
+                                                                  ? 'Outdated monoliths drain resources, create security vulnerabilities, and stall innovation. We safely untangle your legacy code, decoupling rigid architecture into modern, containerized microservices ready for the cloud.'
+                                                                  : service.id === 'lead-generation-systems'
+                                                                    ? 'A beautiful website is useless if it does not convert. We build robust, automated pipelines that capture traffic from Social Media, SEO, and Paid Ads, immediately routing them into high-converting landing pages.'
+                                                                    : service.id === 'custom-workflows'
+                                                                      ? 'Off-the-shelf tools often force you to change how you work. We do the opposite. We engineer bespoke logic modules, data integrations, and unified dashboards that perfectly map to your exact business requirements.'
+                                                                      : service.category.includes('AI') 
+                                                                        ? `Implementing ${service.title.toLowerCase()} goes beyond standard APIs. We build custom intelligence systems that integrate seamlessly with your unique data schemas and operational workflows to ensure accurate, hallucination-free outputs.` 
+                                                                        : `When implementing ${service.title.toLowerCase()}, a robust underlying architecture is critical. We do not just deliver features; we engineer resilient systems designed to handle enterprise workloads seamlessly.`}
+        </p>
+        <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-10">
+          {service.id === 'ai-calling-agent'
+            ? 'By integrating directly into your CRM, calendar systems, and internal databases, our agents do not just talk—they actively update records, book appointments, and trigger follow-up workflows in real time.'
+            : service.id === 'ai-automation'
+              ? 'Our infrastructure is designed for enterprise scale. With secure API gateways, auto-scaling cloud deployments, and continuous real-time monitoring, we guarantee 99.9% uptime for your mission-critical workflows.'
+              : service.id === 'ai-website-development'
+                ? 'Speed does not mean sacrificing quality. We build entirely on modern tech stacks like React, Next.js, and Node.js, ensuring your platform is secure by design, infinitely scalable, and meticulously documented.'
+                : service.id === 'smart-chatbot-integration'
+                  ? 'Our bots go beyond answering FAQs. By securely hooking into your backend databases and CRMs, they can authenticate users, process transactions, check order statuses, and seamlessly route complex edge-cases to a human agent.'
+                  : service.id === 'whatsapp-automation'
+                    ? 'Whether a customer arrives via a Facebook Ad, a QR code, or an organic Instagram link, our automated WhatsApp flows immediately sync their data directly to your CRM and notify your team when a human needs to step in.'
+                    : service.id === 'instagram-automation'
+                      ? 'Beyond conversational AI, we integrate comprehensive scheduling and analytics tools directly into your pipeline. Track profile visits, DM responses, and new followers while your business grows completely on autopilot.'
+                      : service.id === 'crm-integration'
+                        ? 'We integrate with your favorite tools—from Salesforce and HubSpot to Monday and custom built databases. With automated follow-ups and rich data tracking, you get full visibility into what drives revenue.'
+                        : service.id === 'e-commerce-automation'
+                          ? 'From the moment an order is placed to the second it arrives, our systems automate payment processing, inventory syncing, shipping notifications, and abandoned cart recovery—letting you focus purely on growth.'
+                          : service.id === 'custom-ai-development'
+                            ? 'Our end-to-end development cycle takes you from strategy to deployment. We securely connect our custom AI solutions directly into your existing CRM, ERP, and internal databases, turning raw data into actionable automation.'
+                            : service.id === 'machine-learning-solutions'
+                              ? 'Whether it is forecasting inventory demand, detecting fraudulent transactions in real-time, or deeply segmenting your customer base, our models are built for production-grade reliability and high-speed execution.'
+                              : service.id === 'computer-vision'
+                                ? 'From automating quality inspection on manufacturing lines to powering real-time security surveillance and license plate recognition (ANPR), our custom vision models operate with surgical precision.'
+                                : service.id === 'ai-integration-services'
+                                  ? 'Whether it is connecting OpenAI directly to your customer support inbox, having AI auto-draft Jira tickets based on Slack conversations, or syncing custom webhooks to Notion, we build the connective tissue that makes your business smarter.'
+                                  : service.id === 'android-application'
+                                    ? 'Using Kotlin, Android Studio, and Firebase, we build fast, secure, and reliable applications. From custom API integration to full Play Store deployment and ongoing support, we handle the entire lifecycle.'
+                                    : service.id === 'ios-application'
+                                      ? 'From iCloud and Apple Pay to complex camera and CoreML integrations, our end-to-end development process ensures your app passes App Store review and scales flawlessly from day one.'
+                                      : service.id === 'cross-platform-apps'
+                                        ? 'By sharing up to 90% of your codebase, you cut development costs in half and ensure every user gets the exact same feature updates and bug fixes instantly, no matter what device they use.'
+                                        : service.id === 'flutter-development'
+                                          ? 'Flutter\'s powerful rendering engine allows us to build deeply expressive, fluid, and custom-animated UIs that run at a flawless 60 or 120 FPS, radically accelerating your time-to-market.'
+                                          : service.id === 'generative-ai-development'
+                                            ? 'By utilizing Advanced RAG (Retrieval-Augmented Generation), fine-tuning, and robust LLM orchestration, we ensure your custom AI applications are highly secure, hallucination-free, and directly integrated into your existing workflows.'
+                                            : service.id === 'ai-agents'
+                                              ? 'By hooking LLMs directly into external APIs (Tool Use/Function Calling), we transform chatbots into proactive assistants that can automate lead follow-ups, analyze market data, organize files, and communicate effortlessly.'
+                                              : service.id === 'llm-integration'
+                                                ? 'We engineer complex orchestration layers using LangChain, system prompts, and semantic caching. This allows LLMs to summarize vast documents, extract structured JSON from unstructured text, and dynamically route logic based on context.'
+                                                : service.id === 'rag-knowledge-systems'
+                                                  ? 'We process your internal data—from thousands of PDFs and Notion pages to raw SQL databases—and embed them into lightning-fast Vector Databases. When a user asks a question, the AI retrieves the exact relevant paragraph before generating an answer.'
+                                                  : service.id === 'custom-websites'
+                                                    ? 'We guide you through a rigorous process of Consultation, UI/UX Design, and Full-Stack Development. By the time we Test & Launch, your site is fully responsive, securely hosted, and natively optimized for high conversion rates.'
+                                                    : service.id === 'wordpress-development'
+                                                      ? 'Security and speed are our top priorities. We strip out unnecessary bloat, harden your site against attacks, and configure advanced caching (like Yoast SEO) to ensure your WordPress site loads instantly and ranks higher on Google.'
+                                                      : service.id === 'shopify-development'
+                                                        ? 'From seamless mobile-first checkout experiences to robust third-party app integrations and custom functionality, we engineer secure, fast-loading stores that drastically reduce cart abandonment and increase overall sales.'
+                                                        : service.id === 'web-application-development'
+                                                          ? 'We specialize in modern JavaScript frameworks (React, Next.js) and robust backends (Node.js, PHP, Laravel) to build single-page applications (SPAs) that offer native-like speeds, real-time data sync, and iron-clad cloud security.'
+                                                          : service.id === 'custom-software-development'
+                                                            ? 'From initial ideation and architecture planning to writing the code and launching via secure cloud deployments, our rigorous engineering process ensures your custom software is scalable, performant, and deeply integrated with your existing infrastructure.'
+                                                            : service.id === 'saas-development'
+                                                              ? 'From integrating complex billing engines (Stripe, Chargebee) to architecting elastic cloud infrastructure and passing SOC-2 compliance, we provide the full-stack engineering muscle needed to rapidly launch and scale your software company.'
+                                                              : service.id === 'mvp-development'
+                                                                ? 'We map out a clear roadmap from Ideation to Build to Launch. By deploying robust analytics and tracking from day one, we help you gather real usage data, secure early adopters, and make calculated pivot-or-persevere decisions.'
+                                                                : service.id === 'legacy-application-modernization'
+                                                                  ? 'We guarantee zero-downtime migrations. Through a rigorous 4-stage process—Assessment, Decoupling, Containerization, and DevOps Implementation—we upgrade your UI, refactor your data schemas, and deploy your new platform seamlessly.'
+                                                                  : service.id === 'lead-generation-systems'
+                                                                    ? 'Once captured, leads do not just sit idle. We engineer multi-step nurturing sequences that use automated emails, dynamic lead scoring, and instant CRM synchronization to pass only warm, qualified prospects to your sales dashboard.'
+                                                                    : service.id === 'custom-workflows'
+                                                                      ? 'From capturing complex multi-channel inputs (WhatsApp, Website, Email) to executing intricate backend processing, we build robust integrations using custom API chaining, strict error handling, and scalable microservices.'
+                                                                      : service.category === 'Automation Solutions' 
+                                                                        ? 'Our methodology focuses on identifying bottlenecks and engineering automation pipelines that reduce manual effort by up to 90%, ensuring your workflows remain scalable and secure.'
+                                                                        : `By prioritizing clean architecture, robust security protocols, and seamless scalability, we ensure that your investment in ${service.category.toLowerCase()} continues to drive measurable ROI long after the initial launch.`}
+        </p>
+        <ul class="space-y-4">
+          <li class="flex items-center gap-3">
+            <CheckCircle2 class="w-6 h-6 text-[#00bfff]" />
+            <span class="text-slate-700 dark:text-slate-300 font-medium">
+              {service.id === 'ai-calling-agent' 
+                ? 'Sub-500ms conversational latency' 
+                : service.id === 'ai-automation'
+                  ? 'Cloud infrastructure with auto-scaling'
+                  : service.id === 'ai-website-development'
+                    ? 'Modern Tech Stack (Next.js, React, Node)'
+                    : service.id === 'smart-chatbot-integration'
+                      ? 'Unified Omnichannel Architecture'
+                      : service.id === 'whatsapp-automation'
+                        ? 'Official WhatsApp Business API Integration'
+                        : service.id === 'instagram-automation'
+                          ? 'Trigger-based DM & Comment Replies'
+                          : service.id === 'crm-integration'
+                            ? 'Real-Time Omnichannel Sync'
+                            : service.id === 'e-commerce-automation'
+                              ? 'Cross-Platform Inventory Synchronization'
+                              : service.id === 'custom-ai-development'
+                                ? 'Tailored to Your Specific Industry Needs'
+                                : service.id === 'machine-learning-solutions'
+                                  ? 'Advanced Predictive & Statistical Modeling'
+                                  : service.id === 'computer-vision'
+                                    ? 'High-Accuracy Object & Defect Detection'
+                                    : service.id === 'ai-integration-services'
+                                      ? 'Secure API Integration (REST & GraphQL)'
+                                      : service.id === 'android-application'
+                                        ? 'Native Kotlin & Java Development'
+                                        : service.id === 'ios-application'
+                                          ? 'Native Swift & SwiftUI Development'
+                                          : service.id === 'cross-platform-apps'
+                                            ? 'React Native & Flutter Frameworks'
+                                            : service.id === 'flutter-development'
+                                              ? 'Single Dart Codebase for All Platforms'
+                                              : service.id === 'generative-ai-development'
+                                                ? 'Multi-Modal Generation (Text, Image, Code, Video)'
+                                                : service.id === 'ai-agents'
+                                                  ? 'LLM Function Calling & Tool Use'
+                                                  : service.id === 'llm-integration'
+                                                    ? 'Zero-Data-Retention Security Policies'
+                                                    : service.id === 'rag-knowledge-systems'
+                                                      ? 'High-Performance Vector Databases (Pinecone, Weaviate)'
+                                                      : service.id === 'custom-websites'
+                                                        ? 'Unique Design Tailored to Your Brand'
+                                                        : service.id === 'wordpress-development'
+                                                          ? 'Custom Theme & Template Design'
+                                                          : service.id === 'shopify-development'
+                                                            ? 'Bespoke Custom Liquid Theme Development'
+                                                            : service.id === 'web-application-development'
+                                                              ? 'Modern React & Vue Component Architectures'
+                                                              : service.id === 'custom-software-development'
+                                                                ? 'End-to-End Ideation & Full-Stack Development'
+                                                                : service.id === 'saas-development'
+                                                                  ? 'Secure Multi-Tenant Cloud Architecture'
+                                                                  : service.id === 'mvp-development'
+                                                                    ? 'Rapid Hypothesis Testing & Validation'
+                                                                    : service.id === 'legacy-application-modernization'
+                                                                      ? 'Monolith to Microservices Refactoring'
+                                                                      : service.id === 'lead-generation-systems'
+                                                                        ? 'Multi-Source Traffic Integration (Ads, SEO, Social)'
+                                                                        : service.id === 'custom-workflows'
+                                                                          ? 'Complex API Chaining & Custom Webhooks'
+                                                                          : service.category.includes('AI') 
+                                                                            ? 'Proprietary model architecture & fine-tuning' 
+                                                                            : 'Rapid iterative delivery cycles'}
+            </span>
+          </li>
+          <li class="flex items-center gap-3">
+            <CheckCircle2 class="w-6 h-6 text-[#00bfff]" />
+            <span class="text-slate-700 dark:text-slate-300 font-medium">
+              {service.id === 'ai-calling-agent' 
+                ? 'Dynamic conversation state management' 
+                : service.id === 'ai-automation'
+                  ? 'Real-time workflow monitoring & alerting'
+                  : service.id === 'ai-website-development'
+                    ? 'Scalable, enterprise-ready architecture'
+                    : service.id === 'smart-chatbot-integration'
+                      ? 'Secure API & Database Syncing'
+                      : service.id === 'whatsapp-automation'
+                        ? 'Interactive Message Templates & Buttons'
+                        : service.id === 'instagram-automation'
+                          ? 'Smart Lead Capture & CRM Sync'
+                          : service.id === 'crm-integration'
+                            ? 'Unified Customer Activity History'
+                            : service.id === 'e-commerce-automation'
+                              ? 'Automated Order Fulfillment & Routing'
+                              : service.id === 'custom-ai-development'
+                                ? 'End-to-End Development & Support'
+                                : service.id === 'machine-learning-solutions'
+                                  ? 'Real-Time Anomaly & Fraud Detection'
+                                  : service.id === 'computer-vision'
+                                    ? 'Live CCTV & Drone Video Processing'
+                                    : service.id === 'ai-integration-services'
+                                      ? 'Custom Webhook & Middleware Engineering'
+                                      : service.id === 'android-application'
+                                        ? 'Scalable & Secure Backend Architecture'
+                                        : service.id === 'ios-application'
+                                          ? 'Apple Human Interface Guidelines (HIG)'
+                                          : service.id === 'cross-platform-apps'
+                                            ? 'Synchronized Real-Time Data Across Devices'
+                                            : service.id === 'flutter-development'
+                                              ? 'Native ARM Compilation for 60FPS Performance'
+                                              : service.id === 'generative-ai-development'
+                                                ? 'Advanced RAG & Knowledge Systems'
+                                                : service.id === 'ai-agents'
+                                                  ? 'Seamless Integration (Slack, Gmail, Notion)'
+                                                  : service.id === 'llm-integration'
+                                                    ? 'Complex Output Formatting (JSON/XML)'
+                                                    : service.id === 'rag-knowledge-systems'
+                                                      ? 'Semantic Search & Exact Context Retrieval'
+                                                      : service.id === 'custom-websites'
+                                                        ? 'Fully Responsive Mobile-First Architecture'
+                                                        : service.id === 'wordpress-development'
+                                                          ? 'WooCommerce & E-Commerce Integration'
+                                                          : service.id === 'shopify-development'
+                                                            ? 'High-Converting Mobile-Friendly Storefronts'
+                                                            : service.id === 'web-application-development'
+                                                              ? 'High-Performance SPA/SSR (Next.js) Frameworks'
+                                                              : service.id === 'custom-software-development'
+                                                                ? 'Microservices & Serverless Architecture Design'
+                                                                : service.id === 'saas-development'
+                                                                  ? 'Stripe & Chargebee Subscription Integrations'
+                                                                  : service.id === 'mvp-development'
+                                                                    ? 'Strict Core Feature Set Engineering'
+                                                                    : service.id === 'legacy-application-modernization'
+                                                                      ? 'Zero-Downtime Cloud Migration Strategy'
+                                                                      : service.id === 'lead-generation-systems'
+                                                                        ? 'Dynamic Lead Scoring & Nurturing Sequences'
+                                                                        : service.id === 'custom-workflows'
+                                                                          ? 'Omnichannel Input Routing (Web, WhatsApp, Messenger)'
+                                                                          : 'Enterprise-grade security & compliance'}
+            </span>
+          </li>
+          <li class="flex items-center gap-3">
+            <CheckCircle2 class="w-6 h-6 text-[#00bfff]" />
+            <span class="text-slate-700 dark:text-slate-300 font-medium">
+              {service.id === 'ai-calling-agent' 
+                ? 'Seamless CRM & webhook integrations' 
+                : service.id === 'ai-automation'
+                  ? 'Secure database & third-party API sync'
+                  : service.id === 'ai-website-development'
+                    ? 'End-to-end AI-powered workflow'
+                    : service.id === 'smart-chatbot-integration'
+                      ? 'Intelligent Human Handoff Protocols'
+                      : service.id === 'whatsapp-automation'
+                        ? 'Click-to-WhatsApp Ad Integrations'
+                        : service.id === 'instagram-automation'
+                          ? 'Automated Content Scheduling & Posting'
+                          : service.id === 'crm-integration'
+                            ? 'Custom API & Third-Party Integrations'
+                            : service.id === 'e-commerce-automation'
+                              ? 'Intelligent Abandoned Cart Recovery'
+                              : service.id === 'custom-ai-development'
+                                ? 'Seamless Integration with Existing Tools'
+                                : service.id === 'machine-learning-solutions'
+                                  ? 'Automated Data Cleansing & Ingestion Pipelines'
+                                  : service.id === 'computer-vision'
+                                    ? 'Real-World Hardware & Edge Deployments'
+                                    : service.id === 'ai-integration-services'
+                                      ? 'LLM Connectivity (OpenAI, Anthropic)'
+                                      : service.id === 'android-application'
+                                        ? 'Google Play Store Deployment & Support'
+                                        : service.id === 'ios-application'
+                                          ? 'App Store Review & Seamless Deployment'
+                                          : service.id === 'cross-platform-apps'
+                                            ? 'Significantly Lower Development & Maintenance Cost'
+                                            : service.id === 'flutter-development'
+                                              ? 'Expressive, Fully Custom UI Rendering Engine'
+                                              : service.id === 'generative-ai-development'
+                                                ? 'Autonomous AI Agents & Intelligent Automation'
+                                                : service.id === 'ai-agents'
+                                                  ? 'Automate, Analyze & Organize Workflows'
+                                                  : service.id === 'llm-integration'
+                                                    ? 'LangChain & Orchestration Middleware'
+                                                    : service.id === 'rag-knowledge-systems'
+                                                      ? 'Guaranteed Hallucination-Free Responses'
+                                                      : service.id === 'custom-websites'
+                                                        ? 'High Performance & Technical SEO Optimized'
+                                                        : service.id === 'wordpress-development'
+                                                          ? 'Advanced Security & SEO Optimization'
+                                                          : service.id === 'shopify-development'
+                                                            ? 'Third-Party Apps & API Integrations'
+                                                            : service.id === 'web-application-development'
+                                                              ? 'Secure Node.js & Laravel REST/GraphQL APIs'
+                                                              : service.id === 'custom-software-development'
+                                                                ? 'Iron-Clad Cloud Security & Scaling'
+                                                                : service.id === 'saas-development'
+                                                                  ? 'Automated CI/CD & Elastic Scaling'
+                                                                  : service.id === 'mvp-development'
+                                                                    ? 'User Activity & Analytics Tracking'
+                                                                    : service.id === 'legacy-application-modernization'
+                                                                      ? 'DevOps Implementation & CI/CD Pipelines'
+                                                                      : service.id === 'lead-generation-systems'
+                                                                        ? 'Instant CRM Synchronization & Sales Dashboards'
+                                                                        : service.id === 'custom-workflows'
+                                                                          ? 'Visual Dashboards for Operational Control'
+                                                                          : service.category === 'Automation Solutions' 
+                                                                            ? 'End-to-end workflow monitoring' 
+                                                                            : 'Comprehensive documentation & handoff'}
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <BottomCTA client:load />
+
+</Layout>

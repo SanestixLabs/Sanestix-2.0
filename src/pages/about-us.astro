@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BottomCTA from '../components/home/BottomCTA';
+import { Users2, Target, Zap } from 'lucide-react';
+---
+
+<Layout title="About Us | Sanestix">
+  <section class="w-full pt-12 pb-20 px-6 lg:px-12 max-w-[1600px] mx-auto">
+    <div class="flex flex-col lg:flex-row items-center gap-16">
+      <div class="w-full lg:w-1/2">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-2 h-2 rounded-full bg-[#00bfff]"></div>
+          <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase">COMPANY</span>
+        </div>
+        <h1 class="text-5xl md:text-6xl lg:text-[72px] font-bold text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-8">
+          The <span class="text-[#00bfff]">Agentic AI</span> & Automation Agency.
+        </h1>
+        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed mb-6">
+          From advanced Agentic AI systems and intelligent chatbots to custom software, mobile apps, and full-stack web development — we build autonomous solutions that help your business operate, sell, and scale seamlessly.
+        </p>
+        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed mb-12">
+          We're not just developers. We are an expert Agentic AI and automation agency — every system we build is engineered for revenue, autonomous scalability, and long-term technological dominance.
+        </p>
+      </div>
+      <div class="w-full lg:w-1/2 relative flex justify-center lg:justify-end">
+        <div class="relative w-full max-w-[700px] flex justify-center lg:justify-end">
+          <img src="/orb.jpg" alt="Sanestix Vision" class="w-full h-auto object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-8 dark:rounded-[3rem] transform hover:scale-105 transition-all duration-700 ease-out" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-900 border-y border-slate-100 dark:border-slate-800 relative overflow-hidden transition-colors duration-300">
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#0000000a_1px,transparent_1px),linear-gradient(to_bottom,#0000000a_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+    <div class="max-w-[1600px] mx-auto relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white dark:bg-slate-950 p-10 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 flex flex-col items-start gap-4 hover:-translate-y-1">
+          <div class="w-14 h-14 rounded-2xl bg-[#00bfff]/10 flex items-center justify-center"><Target class="w-7 h-7 text-[#00bfff]" /></div>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-4">Our Mission</h3>
+          <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-lg">To democratize enterprise-grade AI execution, making elite automation accessible to scaling businesses worldwide.</p>
+        </div>
+        <div class="bg-white dark:bg-slate-950 p-10 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 flex flex-col items-start gap-4 hover:-translate-y-1">
+          <div class="w-14 h-14 rounded-2xl bg-[#00bfff]/10 flex items-center justify-center"><Zap class="w-7 h-7 text-[#00bfff]" /></div>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-4">Our Vision</h3>
+          <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-lg">A future where human talent is entirely freed from repetitive execution, allowing teams to focus purely on strategy and creativity.</p>
+        </div>
+        <div class="bg-white dark:bg-slate-950 p-10 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 flex flex-col items-start gap-4 hover:-translate-y-1">
+          <div class="w-14 h-14 rounded-2xl bg-[#00bfff]/10 flex items-center justify-center"><Users2 class="w-7 h-7 text-[#00bfff]" /></div>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-4">Our Values</h3>
+          <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-lg">Radical transparency, relentless engineering excellence, and an uncompromising commitment to client growth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <BottomCTA client:load />
+</Layout>

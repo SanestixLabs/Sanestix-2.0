@@ -1,0 +1,228 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { industries } from '../../data/industries';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import BottomCTA from '../../components/home/BottomCTA';
+
+export function getStaticPaths() {
+  return industries.map(industry => ({
+    params: { slug: industry.id },
+    props: { industry },
+  }));
+}
+
+const { industry } = Astro.props;
+
+let heroImage = '/hero1.png';
+let secondaryImage = '/hero2.jpg';
+
+if (industry.id === 'b2b-services') {
+  heroImage = '/b2b-hero.jpg';
+  secondaryImage = '/b2b-architecture.jpg';
+} else if (industry.id === 'food-restaurants') {
+  heroImage = '/food-hero.jpg';
+  secondaryImage = '/food-architecture.jpg';
+} else if (industry.id === 'education') {
+  heroImage = '/education-hero.png';
+  secondaryImage = '/education-architecture.png';
+} else if (industry.id === 'fashion-retail') {
+  heroImage = '/fashion-hero.png';
+  secondaryImage = '/fashion-architecture.png';
+} else if (industry.id === 'logistics') {
+  heroImage = '/logistics-hero.png';
+  secondaryImage = '/logistics-architecture.png';
+} else if (industry.id === 'real-estate') {
+  heroImage = '/realestate-hero.jpg';
+  secondaryImage = '/realestate-architecture.png';
+} else if (industry.id === 'healthcare') {
+  heroImage = '/healthcare-hero.jpg';
+  secondaryImage = '/healthcare-architecture.jpg';
+} else if (industry.id === 'manufacturing') {
+  heroImage = '/manufacturing-hero.png';
+  secondaryImage = '/manufacturing-architecture.jpg';
+} else if (industry.id === 'finance-insurance') {
+  heroImage = '/finance-hero.jpg';
+  secondaryImage = '/finance-architecture.jpg';
+} else if (industry.id === 'death-care') {
+  heroImage = '/deathcare-hero.jpg';
+  secondaryImage = '/deathcare-architecture.jpg';
+} else if (industry.id === 'travel') {
+  heroImage = '/travel-hero.jpg';
+  secondaryImage = '/travel-architecture.jpg';
+} else if (industry.id === 'legal-finance') {
+  heroImage = '/legal-hero.png';
+  secondaryImage = '/legal-architecture.jpg';
+}
+---
+
+<Layout title={`${industry.title} Automation Solutions | Sanestix`}>
+  
+  <section class="w-full pt-12 pb-20 px-6 lg:px-12 max-w-[1600px] mx-auto">
+    <div class="flex flex-col lg:flex-row items-center gap-16">
+      <div class="w-full lg:w-1/2">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-2 h-2 rounded-full bg-[#00bfff]"></div>
+          <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase">INDUSTRY SOLUTION</span>
+        </div>
+        <h1 class="text-5xl md:text-6xl lg:text-[72px] font-bold text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-8">
+          Automation for <br/><span class="text-[#00bfff]">{industry.title}</span>.
+        </h1>
+        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed mb-12">
+          {industry.description}
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/contact">
+            <button class="bg-[#0a0f1c] hover:bg-black text-white rounded-xl px-8 h-14 text-base font-medium flex items-center gap-2 shadow-lg transition-all hover:shadow-xl hover:-translate-y-0.5">
+              Explore Playbooks <ArrowRight class="w-5 h-5 text-white/70" />
+            </button>
+          </a>
+        </div>
+      </div>
+      <div class="w-full lg:w-1/2 relative flex justify-center lg:justify-end">
+        <div class="relative w-full max-w-[700px] flex justify-center lg:justify-end">
+          <img src={heroImage} alt={`${industry.title} Automation`} class="w-full h-auto object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-8 dark:rounded-[3rem] transform hover:scale-105 transition-all duration-700 ease-out" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-900 border-y border-slate-100 dark:border-slate-800 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#0000000a_1px,transparent_1px),linear-gradient(to_bottom,#0000000a_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+    <div class="max-w-[1600px] mx-auto relative z-10">
+      <div class="text-center mb-16 max-w-3xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">Core Capabilities</h2>
+        <p class="text-lg text-slate-500 dark:text-slate-400">Discover the intelligent systems and tailored workflows designed specifically to meet the compliance and operational demands of the {industry.title.toLowerCase()} sector.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {industry.features.map((feature: string) => (
+          <div class="bg-white dark:bg-slate-900 p-10 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 flex items-start gap-5 hover:-translate-y-1">
+            <div class="w-12 h-12 rounded-2xl bg-[#00bfff]/10 dark:bg-[#00bfff]/20 flex items-center justify-center shrink-0">
+              <CheckCircle2 class="w-6 h-6 text-[#00bfff]" />
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">{feature}</h3>
+              <p class="text-slate-500 dark:text-slate-400 leading-relaxed">Streamline operations, reduce manual errors, and scale your business with custom {feature.toLowerCase()} tailored for your specific needs.</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full py-24 px-6 lg:px-12 max-w-[1600px] mx-auto">
+    <div class="flex flex-col-reverse lg:flex-row items-center gap-16">
+      <div class="w-full lg:w-1/2 relative flex justify-center lg:justify-start">
+        <div class="relative w-full max-w-[700px]">
+          <div class="absolute inset-0 bg-[#00bfff]/10 rounded-[2rem] transform translate-x-4 translate-y-4"></div>
+          <img src={secondaryImage} alt="Industry Architecture" class="relative w-full h-auto object-cover rounded-[2rem] shadow-xl z-10 dark:bg-white dark:p-6" />
+        </div>
+      </div>
+      <div class="w-full lg:w-1/2">
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+          {industry.id === 'b2b-services' 
+            ? 'End-to-End Pipeline Automation.'
+            : industry.id === 'food-restaurants'
+              ? 'The Integrated Operations Nexus.'
+              : industry.id === 'education'
+                ? 'The Intelligent Digital Campus.'
+                : industry.id === 'fashion-retail'
+                  ? 'Intelligent Omnichannel Commerce.'
+                  : industry.id === 'logistics'
+                    ? 'Global Supply Chain Command.'
+                    : industry.id === 'manufacturing'
+                      ? 'The Smart Factory Floor.'
+                      : industry.id === 'real-estate'
+                        ? 'Elevated Property Experiences.'
+                        : industry.id === 'healthcare'
+                          ? 'Uncompromising Security & Care.'
+                          : industry.id === 'finance-insurance'
+                            ? 'Bulletproof Financial Ecosystems.'
+                            : industry.id === 'death-care'
+                              ? 'Compassionate Operations Support.'
+                              : industry.id === 'travel'
+                                ? 'Reimagining Global Journeys.'
+                                : industry.id === 'legal-finance'
+                                  ? 'Precision Casework Automation.'
+                                  : `Unlocking true scale for ${industry.title}.`}
+        </h2>
+        <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
+          {industry.id === 'b2b-services'
+            ? 'B2B sales cycles are notoriously complex. We automate the entire pipeline—from capturing high-intent leads and qualifying them instantly, to generating precise quotes and orchestrating multi-stage approval workflows.'
+            : industry.id === 'food-restaurants'
+              ? 'Stop managing five different tablets for food delivery. We consolidate DoorDash, UberEats, your custom website, and in-house POS into one highly efficient, centralized dashboard that feeds directly into kitchen operations.'
+              : industry.id === 'education'
+                ? 'Modern education requires more than just video calls. We engineer cohesive learning platforms that connect students, teachers, and administrators. From interactive virtual classrooms to automated grading systems, we modernize the entire academic experience.'
+                : industry.id === 'fashion-retail'
+                  ? 'The modern consumer shops everywhere at once. We build cohesive automation ecosystems that unify your physical POS systems, Shopify stores, and Instagram sales channels into one synchronized inventory and fulfillment engine.'
+                  : industry.id === 'logistics'
+                    ? 'Logistics is a game of margins and milliseconds. We engineer robust platforms that track shipments across air, sea, and land in real-time, instantly calculating the most cost-effective routes before bottlenecks occur.'
+                    : industry.id === 'manufacturing'
+                      ? 'Legacy manufacturing relies on isolated systems and reactive maintenance. We bridge the gap between heavy machinery and digital intelligence, engineering unified dashboards that track Overall Equipment Effectiveness (OEE) and production output in real-time.'
+                      : industry.id === 'real-estate'
+                        ? 'Real estate is moving faster than ever. We build intelligent platforms that unify property management, automate lead nurturing from high-intent buyers, and provide actionable market insights to maximize your portfolio’s value.'
+                        : industry.id === 'healthcare'
+                          ? 'The healthcare sector requires systems that are not just fast, but inherently secure. We engineer our HIPAA-compliant data pipelines and AI models to meet the strictest regulatory standards, ensuring absolute data privacy.'
+                          : industry.id === 'finance-insurance'
+                            ? 'In finance, downtime and fraud are unacceptable. We build bulletproof ecosystems that automate complex claims processing, deploy AI-driven fraud detection, and deliver hyper-personalized policy generation at scale.'
+                            : industry.id === 'death-care'
+                              ? 'During life\'s most difficult moments, administrative friction should be invisible. We engineer dignified automation platforms that handle sensitive workflows, coordinate scheduling seamlessly, and provide empathetic 24/7 support.'
+                              : industry.id === 'travel'
+                                ? 'The modern traveler expects instant answers and seamless experiences. We architect intelligent travel platforms that unify booking ecosystems and dynamically optimize itineraries in real-time.'
+                                : industry.id === 'legal-finance'
+                                  ? 'The legal landscape demands uncompromising precision. We engineer highly secure legal tech platforms that automate complex document generation and streamline global case management.'
+                                  : `The ${industry.title.toLowerCase()} industry requires systems built for massive throughput. We engineer our automation pipelines to eliminate manual bottlenecks, allowing your team to focus on core growth.`}
+        </p>
+        <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-10">
+          {industry.id === 'b2b-services'
+            ? 'By integrating directly into your existing CRM (Salesforce, HubSpot) and productivity tools (Slack, Jira), we ensure that your sales team spends less time on administrative data entry and more time closing high-value accounts.'
+            : industry.id === 'food-restaurants'
+              ? 'From predicting inventory shortages based on real-time order volume to automating delivery driver dispatch, our automated ecosystems ensure that hot food reaches customers faster with zero friction.'
+              : industry.id === 'education'
+                ? 'We leverage AI to track student performance in real-time, proactively alerting educators when a student falls behind and automatically suggesting personalized learning content to bridge the gap.'
+                : industry.id === 'fashion-retail'
+                  ? 'By leveraging AI-driven customer insights, we automate dynamic pricing adjustments, personalized marketing emails, and smart merchandising displays—ensuring the right product hits the right audience at the perfect moment.'
+                  : industry.id === 'logistics'
+                    ? 'By aggregating data from live GPS feeds, weather patterns, and global port congestions, we feed predictive analytics directly into your command center—ensuring that 98.7% of your shipments are delivered on time while reducing operational costs by up to 30%.'
+                    : industry.id === 'manufacturing'
+                      ? 'By deploying AI models that analyze vibration, temperature, and historical failure data, we predict equipment breakdowns before they happen—drastically reducing downtime and maintaining stringent quality control standards.'
+                      : industry.id === 'real-estate'
+                        ? 'From automating property viewing schedules to integrating live market data for dynamic pricing strategies, our bespoke solutions ensure your agents spend less time on paperwork and more time closing deals.'
+                        : industry.id === 'healthcare'
+                          ? 'By seamlessly integrating intelligent patient intake systems and secure telehealth data pipelines, we allow your medical professionals to focus on what matters most—delivering exceptional patient care.'
+                          : industry.id === 'finance-insurance'
+                            ? 'Our sophisticated AI models analyze historical data and market trends to automatically flag anomalies, while simultaneously streamlining underwriting workflows to accelerate approvals.'
+                            : industry.id === 'death-care'
+                              ? 'By automating bereavement workflows and service orchestration, we give your team the time and space needed to focus entirely on supporting the families who depend on you.'
+                              : industry.id === 'travel'
+                                ? 'By deploying 24/7 AI concierge services that handle rebookings and support inquiries instantly, we ensure your clients receive white-glove service no matter where they are in the world.'
+                                : industry.id === 'legal-finance'
+                                  ? 'By implementing real-time compliance auditing and intelligent legal document workflows, we ensure your firm operates with maximum efficiency without sacrificing an ounce of security.'
+                                  : `By integrating cutting-edge AI directly into your existing infrastructure, we break down legacy data silos and create a unified operational flow tailored specifically to the realities of ${industry.title.toLowerCase()}.`}
+        </p>
+        <ul class="space-y-4">
+          <li class="flex items-center gap-3">
+            <CheckCircle2 class="w-6 h-6 text-[#00bfff]" />
+            <span class="text-slate-700 dark:text-slate-300 font-medium">
+              {industry.id === 'b2b-services' ? 'Automated Lead Routing & Scoring' : industry.id === 'food-restaurants' ? 'Omnichannel POS & Delivery Integration' : industry.id === 'education' ? 'Unified Student Communication Hubs' : industry.id === 'fashion-retail' ? 'Cross-Channel Inventory Synchronization' : industry.id === 'logistics' ? 'Live Multi-Modal Tracking' : industry.id === 'manufacturing' ? 'Real-Time Production & OEE Dashboards' : industry.id === 'real-estate' ? 'Unified Property & Asset Management' : industry.id === 'healthcare' ? 'Intelligent Patient Intake & Triage' : industry.id === 'finance-insurance' ? 'Automated Claims & Underwriting' : industry.id === 'death-care' ? 'Compassionate 24/7 Support Systems' : industry.id === 'travel' ? 'Unified Global Booking Ecosystems' : industry.id === 'legal-finance' ? 'Automated Legal Document Generation' : 'High-throughput automation pipelines'}
+            </span>
+          </li>
+          <li class="flex items-center gap-3">
+            <CheckCircle2 class="w-6 h-6 text-[#00bfff]" />
+            <span class="text-slate-700 dark:text-slate-300 font-medium">
+              {industry.id === 'b2b-services' ? 'Instant Proposal & Contract Generation' : industry.id === 'food-restaurants' ? 'Predictive Inventory & Kitchen Display Sync' : industry.id === 'education' ? 'AI-Powered Performance Analytics' : industry.id === 'fashion-retail' ? 'Dynamic Pricing & Smart Merchandising' : industry.id === 'logistics' ? 'AI-Driven Route Optimization' : industry.id === 'manufacturing' ? 'AI-Powered Predictive Maintenance' : industry.id === 'real-estate' ? 'Automated Lead Nurturing Workflows' : industry.id === 'healthcare' ? 'HIPAA-Compliant Automation Architecture' : industry.id === 'finance-insurance' ? 'AI-Driven Fraud Detection' : industry.id === 'death-care' ? 'Automated Bereavement Workflows' : industry.id === 'travel' ? 'Dynamic Itinerary Optimization' : industry.id === 'legal-finance' ? 'Secure Global Case Management' : 'Seamless legacy system integration'}
+            </span>
+          </li>
+          <li class="flex items-center gap-3">
+            <CheckCircle2 class="w-6 h-6 text-[#00bfff]" />
+            <span class="text-slate-700 dark:text-slate-300 font-medium">
+              {industry.id === 'b2b-services' ? 'Real-Time CRM Synchronization' : industry.id === 'food-restaurants' ? 'Automated Driver Dispatch & Routing' : industry.id === 'education' ? 'Automated Scheduling & Assignment Alerts' : industry.id === 'fashion-retail' ? 'Automated Targeted Marketing Campaigns' : industry.id === 'logistics' ? 'Predictive Analytics & Cost Efficiency' : industry.id === 'manufacturing' ? 'Automated Quality Assurance Protocols' : industry.id === 'real-estate' ? 'AI-Driven Market Insights' : industry.id === 'healthcare' ? 'Automated Care Coordination' : industry.id === 'finance-insurance' ? 'Personalized Policy Generation' : industry.id === 'death-care' ? 'Seamless Service Orchestration' : industry.id === 'travel' ? '24/7 AI Concierge Services' : industry.id === 'legal-finance' ? 'Real-Time Compliance Auditing' : '24/7 dedicated enterprise support SLAs'}
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <BottomCTA client:load />
+
+</Layout>

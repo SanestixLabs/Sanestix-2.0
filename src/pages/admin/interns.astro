@@ -1,0 +1,230 @@
+---
+export const prerender = false;
+import Layout from '../../layouts/Layout.astro';
+import { db } from '../../lib/db';
+import type { Credential } from '../../types/credential';
+import { v4 as uuidv4 } from 'uuid';
+
+const ADMIN_PASSWORD = 'sanestixadmin';
+
+// Handle authentication
+const cookies = Astro.cookies;
+const authCookie = cookies.get('admin_auth');
+let isAuthenticated = authCookie?.value === ADMIN_PASSWORD;
+
+if (Astro.request.method === 'POST') {
+  const data = await Astro.request.formData();
+  
+  if (data.has('login')) {
+    const password = data.get('password');
+    if (password === ADMIN_PASSWORD) {
+      cookies.set('admin_auth', ADMIN_PASSWORD, { path: '/', maxAge: 60 * 60 * 24 });
+      isAuthenticated = true;
+    }
+  } else if (isAuthenticated) {
+    const action = data.get('action');
+    
+    if (action === 'create') {
+      const id = `STX-INT-2026-${uuidv4().substring(0, 8).toUpperCase()}`;
+      const stmt = db.prepare(`
+        INSERT INTO credentials (id, internName, role, department, programName, startDate, endDate, issueDate, status, verificationCount)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+      `);
+      stmt.run(
+        id,
+        data.get('internName'),
+        data.get('role'),
+        data.get('department'),
+        data.get('programName'),
+        data.get('startDate'),
+        data.get('endDate'),
+        data.get('issueDate'),
+        data.get('status')
+      );
+    } else if (action === 'delete') {
+      const id = data.get('id');
+      db.prepare('DELETE FROM credentials WHERE id = ?').run(id);
+    } else if (action === 'revoke') {
+      const id = data.get('id');
+      db.prepare("UPDATE credentials SET status = 'Revoked' WHERE id = ?").run(id);
+    } else if (action === 'logout') {
+      cookies.delete('admin_auth', { path: '/' });
+      isAuthenticated = false;
+    }
+  }
+}
+
+let credentials: Credential[] = [];
+if (isAuthenticated) {
+  credentials = db.prepare('SELECT * FROM credentials ORDER BY issueDate DESC').all() as Credential[];
+}
+
+const siteUrl = Astro.url.origin;
+---
+
+<Layout title="Admin - Credential Management">
+  <div class="min-h-screen bg-slate-50 pt-24 pb-12 px-6">
+    <div class="max-w-6xl mx-auto">
+      {!isAuthenticated ? (
+        <div class="max-w-md mx-auto bg-white p-8 rounded-2xl border border-slate-200 shadow-sm mt-20">
+          <div class="flex justify-center mb-6">
+            <img src="/logo.jpg" alt="Sanestix" class="h-10" />
+          </div>
+          <h1 class="text-2xl font-bold text-center mb-6">Admin Login</h1>
+          <form method="POST" class="space-y-4">
+            <input type="hidden" name="login" value="true" />
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+              <input type="password" name="password" required class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#00bfff] focus:border-[#00bfff] outline-none transition-all" />
+            </div>
+            <button type="submit" class="w-full bg-[#00bfff] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#0099cc] transition-colors">
+              Login
+            </button>
+          </form>
+        </div>
+      ) : (
+        <>
+          <div class="flex justify-between items-center mb-8">
+            <div>
+              <h1 class="text-3xl font-bold text-slate-900">Credential Management</h1>
+              <p class="text-slate-500 mt-1">Manage intern verifications</p>
+            </div>
+            <form method="POST">
+              <input type="hidden" name="action" value="logout" />
+              <button type="submit" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-lg transition-colors">
+                Logout
+              </button>
+            </form>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1">
+              <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <h2 class="text-xl font-bold mb-4">Create Credential</h2>
+                <form method="POST" class="space-y-4">
+                  <input type="hidden" name="action" value="create" />
+                  
+                  <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Intern Name</label>
+                    <input type="text" name="internName" required class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-[#00bfff] outline-none" />
+                  </div>
+                  
+                  <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Role</label>
+                    <input type="text" name="role" required class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-[#00bfff] outline-none" placeholder="e.g. Frontend Engineering Intern" />
+                  </div>
+                  
+                  <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Department</label>
+                    <input type="text" name="department" required class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-[#00bfff] outline-none" />
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Program Name</label>
+                    <input type="text" name="programName" required class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-[#00bfff] outline-none" placeholder="e.g. Summer Internship 2026" />
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-4">
+                    <div>
+                      <label class="block text-sm font-medium text-slate-700 mb-1">Start Date</label>
+                      <input type="date" name="startDate" required class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-[#00bfff] outline-none" />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-slate-700 mb-1">End Date</label>
+                      <input type="date" name="endDate" required class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-[#00bfff] outline-none" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Issue Date</label>
+                    <input type="date" name="issueDate" required class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-[#00bfff] outline-none" />
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Status</label>
+                    <select name="status" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-[#00bfff] outline-none">
+                      <option value="Active">Active</option>
+                      <option value="Completed">Completed</option>
+                      <option value="Revoked">Revoked</option>
+                    </select>
+                  </div>
+
+                  <button type="submit" class="w-full bg-[#00bfff] text-white font-bold py-2 px-4 rounded-md hover:bg-[#0099cc] transition-colors mt-4">
+                    Generate Credential
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <div class="lg:col-span-2">
+              <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                  <table class="w-full text-left border-collapse">
+                    <thead>
+                      <tr class="bg-slate-50 border-b border-slate-200">
+                        <th class="p-4 font-semibold text-slate-600">Intern</th>
+                        <th class="p-4 font-semibold text-slate-600">Role</th>
+                        <th class="p-4 font-semibold text-slate-600">ID / Status</th>
+                        <th class="p-4 font-semibold text-slate-600 text-center">Views</th>
+                        <th class="p-4 font-semibold text-slate-600 text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {credentials.map((cred) => (
+                        <tr class="border-b border-slate-100 hover:bg-slate-50">
+                          <td class="p-4">
+                            <div class="font-bold text-slate-900">{cred.internName}</div>
+                            <div class="text-xs text-slate-500">{cred.startDate} to {cred.endDate}</div>
+                          </td>
+                          <td class="p-4">
+                            <div class="text-sm font-medium text-slate-900">{cred.role}</div>
+                            <div class="text-xs text-slate-500">{cred.department}</div>
+                          </td>
+                          <td class="p-4">
+                            <div class="text-xs font-mono bg-slate-100 px-2 py-1 rounded mb-1 inline-block">{cred.id}</div>
+                            <div>
+                              <span class={`text-xs font-bold px-2 py-1 rounded-full ${
+                                cred.status === 'Active' ? 'bg-green-100 text-green-700' :
+                                cred.status === 'Completed' ? 'bg-blue-100 text-blue-700' :
+                                'bg-red-100 text-red-700'
+                              }`}>
+                                {cred.status}
+                              </span>
+                            </div>
+                          </td>
+                          <td class="p-4 text-center">
+                            <span class="font-bold text-slate-700">{cred.verificationCount}</span>
+                          </td>
+                          <td class="p-4 text-right space-x-2">
+                            <a href={`/verify/${cred.id}`} target="_blank" class="text-sm text-[#00bfff] hover:underline font-medium">View</a>
+                            {cred.status !== 'Revoked' && (
+                              <form method="POST" class="inline">
+                                <input type="hidden" name="action" value="revoke" />
+                                <input type="hidden" name="id" value={cred.id} />
+                                <button type="submit" class="text-sm text-red-500 hover:underline font-medium" onclick="return confirm('Are you sure you want to revoke this credential?')">Revoke</button>
+                              </form>
+                            )}
+                            <form method="POST" class="inline">
+                              <input type="hidden" name="action" value="delete" />
+                              <input type="hidden" name="id" value={cred.id} />
+                              <button type="submit" class="text-sm text-slate-400 hover:text-red-500 font-medium" onclick="return confirm('Delete permanently?')">Delete</button>
+                            </form>
+                          </td>
+                        </tr>
+                      ))}
+                      {credentials.length === 0 && (
+                        <tr>
+                          <td colspan="5" class="p-8 text-center text-slate-500">No credentials generated yet.</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,391 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BottomCTA from '../components/home/BottomCTA';
+import {
+  Rocket,
+  Wallet,
+  Radio,
+  Code2,
+  CheckCircle2,
+  ArrowRight,
+} from 'lucide-react';
+
+const heroStats = [
+  { value: '27', label: 'Live Classes' },
+  { value: '8', label: 'Weeks' },
+  { value: '100%', label: 'Shipped Live Systems' },
+];
+
+const whyAcademy = [
+  {
+    icon: Rocket,
+    title: 'Real systems, not demos',
+    description: 'Every project you build in class is production-ready. Not a toy — something you can sell.',
+  },
+  {
+    icon: Wallet,
+    title: 'Income from Week 3',
+    description: 'Cohort 1 students billed paying clients before the course was halfway done.',
+  },
+  {
+    icon: Radio,
+    title: 'Live, not recorded',
+    description: 'All 25 classes are live with real-time Q&A. Replays included so you never miss a beat.',
+  },
+  {
+    icon: Code2,
+    title: 'No coding required',
+    description: 'We use n8n, Lovable, and AI-powered tools — built for builders, not programmers.',
+  },
+];
+
+const curriculum = [
+  { week: 'W1–2', tag: 'LIVE', title: 'AI Foundations & n8n', description: 'Prompting, agents, automations, RAG' },
+  { week: 'W3', tag: 'LIVE', title: 'WhatsApp, Instagram & Hosting', description: 'Lead bots, DM automation, self-hosted n8n' },
+  { week: 'W4', tag: '+PKR 45K', title: 'Voice Agents — Vapi', description: 'English & Urdu AI callers, appointment booking' },
+  { week: 'W5', tag: 'LIVE', title: 'AI Websites & Vibe Coding', description: 'Lovable, AI chatbots, n8n lead capture' },
+  { week: 'W6', tag: 'LIVE', title: 'Shopify & Ecommerce AI', description: 'Product copy, support bots, cart recovery' },
+  { week: 'W7', tag: '+PKR 60K', title: 'Meta Ads & Lead Gen', description: 'Campaigns, AI ad copy, instant WhatsApp follow-up' },
+  { week: 'W8', tag: 'EARN', title: 'Client Acquisition & Capstone', description: 'Outreach, proposals, PKR 30K–100K offers' },
+];
+
+const curriculumStats = [
+  { value: '25', label: 'Live Classes' },
+  { value: '8', label: 'Weeks' },
+  { value: '40', label: 'Max Seats' },
+  { value: '7-Day', label: 'Refund' },
+  { value: 'Yes', label: 'Installments' },
+  { value: 'Yes', label: 'Sessions Recorded' },
+];
+
+const resultStats = [
+  { value: '100%', label: 'Shipped a live system' },
+  { value: 'Week 3', label: 'First client billed' },
+  { value: '27+', label: 'Projects in production' },
+  { value: 'PKR 45K', label: 'First invoice sent' },
+];
+
+const testimonials = [
+  {
+    quote: 'One WhatsApp bot. One client. PKR 45,000. That\'s 3× the course fee — in Week 3.',
+    name: 'Zara Ahmed',
+    role: 'PKR 45K earned · Cohort 1',
+    initials: 'ZA',
+  },
+  {
+    quote: 'Zero AI knowledge. By Week 5 I was deploying voice agents for a real estate client — PKR 60K/month.',
+    name: 'Hassan Raza',
+    role: 'PKR 60K/month retainer · Cohort 2',
+    initials: 'HR',
+  },
+  {
+    quote: 'Non-technical founder. Week 2 I built my first n8n flow. Week 6 I automated my own agency.',
+    name: 'Aisha Khan',
+    role: 'Automated her agency · Cohort 2',
+    initials: 'AK',
+  },
+];
+
+const instructors = [
+  {
+    initials: 'SF',
+    name: 'Saad Faisal Qureshi',
+    role: 'Founder & CEO · Sanestix',
+    linkedin: 'https://www.linkedin.com/in/saadfaisalqureshi',
+    bio: 'Saad has deployed AI automation for 15+ businesses across Pakistan and the UAE. He owns the full revenue cycle at Sanestix — prospecting, pitching, closing, retaining. What he teaches is the exact playbook he used to sign clients last week.',
+    tags: ['AI Strategy', 'Business Automation', 'Client Growth', 'n8n'],
+    stats: [
+      { value: '15+', label: 'Businesses Automated' },
+      { value: '100k+', label: 'AI Messages Handled' },
+    ],
+  },
+  {
+    initials: 'AW',
+    name: 'Abdul Wahab Siddiqi',
+    role: 'Co-Founder & COO · Sanestix',
+    linkedin: 'https://www.linkedin.com/in/abdulwahabsiddiqi',
+    bio: 'Abdul Wahab architects every production system Sanestix ships — n8n pipelines, Claude API integrations, MCP servers, and voice agents running 24/7 for paying clients. Every technical module has been stress-tested in the field.',
+    tags: ['AI Systems Architecture', 'n8n', 'Claude API', 'MCP', 'Vapi'],
+    stats: [
+      { value: '2–7', label: 'Days to Go Live' },
+      { value: '24/7', label: 'Systems Running' },
+    ],
+  },
+];
+
+const faqs = [
+  {
+    q: 'Do I need any coding experience to join?',
+    a: 'None. Every tool we use — n8n, Lovable, and AI-powered tools — is built for non-programmers. By Week 5 you\'ll deploy working apps. All you need is a laptop.',
+  },
+  {
+    q: 'How are the classes delivered?',
+    a: 'All 25 classes are live — 3 per week, 2 hours each. First hour: instruction. Second hour: you build it live. Every session is recorded so you never fall behind.',
+  },
+  {
+    q: 'What tools and subscriptions will I need?',
+    a: 'Almost everything has a free tier. Budget PKR 2,000–5,000 total for 8 weeks — Claude API, Vapi credits, and Supabase all have generous free plans.',
+  },
+  {
+    q: 'How many hours per week does this take?',
+    a: '8–10 hours per week. 6 live class hours plus 2–4 hours of practice. Evening sessions, so it works around a job or studies.',
+  },
+  {
+    q: 'Can I realistically earn money after 8 weeks?',
+    a: 'Cohort 1 had paying clients by Week 3. The services you learn — automations, WhatsApp bots, voice agents — are what businesses in Pakistan and UAE are paying PKR 30K–100K for right now.',
+  },
+  {
+    q: 'Is there a money-back guarantee?',
+    a: 'Yes. Attend the first class. If it\'s not for you, message us within 7 days for a full refund — no questions.',
+  },
+  {
+    q: 'Is there a payment plan?',
+    a: '50% upfront to lock your seat, remaining 50% before Week 5. WhatsApp us to arrange.',
+  },
+  {
+    q: 'When does Cohort 3 start?',
+    a: 'June 19, 2026. Cohorts are capped at 40 seats and run every 10–12 weeks. The last cohort filled within 72 hours of the announcement.',
+  },
+];
+---
+
+<Layout title="Sanestix Academy — Agentic AI Mastery Course | Sanestix">
+
+  <!-- Hero -->
+  <section class="w-full pt-32 pb-16 px-6 lg:px-12 max-w-[1600px] mx-auto">
+    <div class="max-w-4xl">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-2 h-2 rounded-full bg-[#00bfff]"></div>
+        <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase">Cohort 3 · June 19 · 7 seats left</span>
+      </div>
+      <h1 class="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-8">
+        Build production-ready AI agents. In 8 weeks.
+      </h1>
+      <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed mb-10">
+        Sanestix Academy is a hands-on Agentic AI Mastery program — real client projects, live classes, zero fluff. Built by a working AI agency, not a school.
+      </p>
+
+      <div class="flex flex-wrap gap-4 mb-6">
+        <a href="https://academy.sanestix.com/seminar.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#0a0f1c] hover:bg-black text-white dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 font-bold py-4 px-8 rounded-xl shadow-lg transition-all hover:-translate-y-0.5">
+          Free Seminar
+          <ArrowRight className="w-5 h-5" />
+        </a>
+        <a href="https://academy.sanestix.com/course.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-transparent border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white font-bold py-4 px-8 rounded-xl transition-all hover:bg-slate-50 dark:hover:bg-slate-900">
+          See Full Curriculum
+        </a>
+      </div>
+
+      <p class="text-sm text-slate-500 dark:text-slate-500">
+        No credit card required · No commitment · 100% private
+      </p>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-3 gap-8 mt-16 pt-10 border-t border-slate-100 dark:border-slate-800 max-w-2xl">
+      {heroStats.map((stat) => (
+        <div>
+          <div class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-1">{stat.value}</div>
+          <div class="text-sm text-slate-500 dark:text-slate-400">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Why Sanestix Academy -->
+  <section class="w-full py-20 px-6 lg:px-12 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-100 dark:border-slate-800 transition-colors">
+    <div class="max-w-[1600px] mx-auto">
+      <div class="max-w-3xl mb-16">
+        <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase mb-4 block">Why Sanestix Academy</span>
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white leading-tight">
+          Built by operators, not educators.
+        </h2>
+        <p class="text-lg text-slate-600 dark:text-slate-400 mt-6 max-w-2xl">
+          Every lesson comes from live client work at Sanestix — a real AI agency serving businesses in Pakistan and UAE.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {whyAcademy.map((item) => (
+          <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 flex flex-col gap-4 transition-colors">
+            <div class="w-12 h-12 rounded-2xl bg-[#00bfff]/10 flex items-center justify-center">
+              <item.icon className="w-6 h-6 text-[#00bfff]" />
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">{item.title}</h3>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Curriculum -->
+  <section id="curriculum" class="w-full py-24 px-6 lg:px-12 max-w-[1600px] mx-auto">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase mb-4 block">The Curriculum</span>
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">8 weeks. 25 classes. One complete AI agency toolkit.</h2>
+      <p class="text-lg text-slate-500 dark:text-slate-400">From your first automation to voice agents, client acquisition, and your first invoice.</p>
+    </div>
+
+    <div class="flex flex-col gap-4 max-w-4xl mx-auto mb-16">
+      {curriculum.map((item) => (
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-100 dark:border-slate-800">
+          <div class="flex items-center gap-4 sm:w-32 shrink-0">
+            <span class="text-lg font-bold text-slate-900 dark:text-white">{item.week}</span>
+            <span class={`text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full ${item.tag === 'EARN' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : item.tag.startsWith('+PKR') ? 'bg-[#00bfff]/10 text-[#00bfff]' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'}`}>{item.tag}</span>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">{item.title}</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">{item.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-6 gap-8 max-w-4xl mx-auto pt-10 border-t border-slate-100 dark:border-slate-800 mb-12">
+      {curriculumStats.map((stat) => (
+        <div class="text-center">
+          <div class="text-2xl font-bold text-slate-900 dark:text-white mb-1">{stat.value}</div>
+          <div class="text-xs text-slate-500 dark:text-slate-400">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center">
+      <a href="https://academy.sanestix.com/course.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[#00bfff] font-bold hover:underline">
+        See Full Curriculum
+        <ArrowRight className="w-4 h-4" />
+      </a>
+    </div>
+  </section>
+
+  <!-- Student Results -->
+  <section id="testimonials" class="w-full py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-100 dark:border-slate-800 transition-colors">
+    <div class="max-w-[1600px] mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase mb-4 block">Student Results</span>
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">Real students. Real money.</h2>
+        <p class="text-lg text-slate-500 dark:text-slate-400">Every result below happened inside an 8-week cohort — not hypotheticals.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mb-16">
+        {resultStats.map((stat) => (
+          <div class="text-center">
+            <div class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-1">{stat.value}</div>
+            <div class="text-sm text-slate-500 dark:text-slate-400">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {testimonials.map((t) => (
+          <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 flex flex-col gap-6">
+            <div class="flex items-center justify-between">
+              <span class="text-[#00bfff] text-lg tracking-widest">★★★★★</span>
+              <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wide">Verified</span>
+            </div>
+            <p class="text-slate-700 dark:text-slate-300 leading-relaxed flex-1">{t.quote}</p>
+            <div class="flex items-center gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <div class="w-10 h-10 rounded-full bg-[#00bfff]/10 text-[#00bfff] font-bold flex items-center justify-center text-sm shrink-0">
+                {t.initials}
+              </div>
+              <div>
+                <div class="font-bold text-slate-900 dark:text-white text-sm">{t.name}</div>
+                <div class="text-slate-500 dark:text-slate-400 text-sm">{t.role}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p class="text-center text-slate-500 dark:text-slate-400 mt-12">
+        <span class="font-bold text-slate-900 dark:text-white">100+ students</span> already in the WhatsApp community —
+        <a href="https://chat.whatsapp.com/Im9gncY5IGy4HWAFcT9i1N" target="_blank" rel="noopener noreferrer" class="text-[#00bfff] font-bold hover:underline">join the community →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Instructors -->
+  <section id="instructors" class="w-full py-24 px-6 lg:px-12 max-w-[1600px] mx-auto">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase mb-4 block">Your Instructors</span>
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">Built by people who do this daily.</h2>
+      <p class="text-lg text-slate-500 dark:text-slate-400">Every workflow and pricing strategy in this course came from Sanestix's active client work — not a textbook.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      {instructors.map((person) => (
+        <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 flex flex-col gap-6">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-[#00bfff]/10 text-[#00bfff] font-bold flex items-center justify-center text-lg shrink-0">
+              {person.initials}
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">{person.name}</h3>
+              <p class="text-slate-500 dark:text-slate-400 text-sm">{person.role}</p>
+              <a href={person.linkedin} target="_blank" rel="noopener noreferrer" class="text-[#00bfff] text-sm font-bold hover:underline">LinkedIn</a>
+            </div>
+          </div>
+          <p class="text-slate-600 dark:text-slate-400 leading-relaxed">{person.bio}</p>
+          <div class="flex flex-wrap gap-2">
+            {person.tags.map((tag) => (
+              <span class="text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full">{tag}</span>
+            ))}
+          </div>
+          <div class="flex gap-8 pt-4 border-t border-slate-100 dark:border-slate-800">
+            {person.stats.map((stat) => (
+              <div>
+                <div class="text-xl font-bold text-slate-900 dark:text-white">{stat.value}</div>
+                <div class="text-xs text-slate-500 dark:text-slate-400">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="w-full py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-100 dark:border-slate-800 transition-colors">
+    <div class="max-w-[1600px] mx-auto">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase mb-4 block">Common Questions</span>
+          <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">Straight answers.</h2>
+          <p class="text-lg text-slate-500 dark:text-slate-400 mt-4">Every question serious applicants ask — answered honestly.</p>
+        </div>
+        <div class="flex flex-col gap-6">
+          {faqs.map((item) => (
+            <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 transition-colors">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">{item.q}</h3>
+              <p class="text-slate-600 dark:text-slate-400 mt-2">{item.a}</p>
+            </div>
+          ))}
+        </div>
+        <p class="text-center text-slate-500 dark:text-slate-400 mt-12">
+          Still have a question? We reply within a few hours. <a href="https://wa.me/923014422951" target="_blank" rel="noopener noreferrer" class="text-[#00bfff] font-bold hover:underline">Ask us on WhatsApp →</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reserve your seat -->
+  <section id="register" class="w-full py-20 px-6 lg:px-12 max-w-[1600px] mx-auto">
+    <div class="bg-[#0a0f1c] dark:bg-slate-900 rounded-[2rem] p-12 md:p-16 text-center max-w-4xl mx-auto">
+      <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase mb-4 block">Cohort 3 · Starts June 19 · 7 Seats Left</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Your spot won't hold itself.</h2>
+      <p class="text-slate-300 dark:text-slate-400 max-w-2xl mx-auto mb-10">
+        PKR 18,000 · max 40 seats · installments available · 7-day money-back guarantee, no questions asked.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 mb-6">
+        <a href="https://academy.sanestix.com/seminar.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-slate-900 font-bold py-4 px-8 rounded-xl shadow-lg transition-all hover:-translate-y-0.5">
+          Reserve My Seat
+          <ArrowRight className="w-5 h-5" />
+        </a>
+        <a href="https://academy.sanestix.com/course.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-transparent border border-white/20 text-white font-bold py-4 px-8 rounded-xl transition-all hover:bg-white/10">
+          See Full Curriculum
+        </a>
+      </div>
+      <p class="text-sm text-slate-400">Last cohort sold out in 72 hours · Attended our seminar? Get PKR 3,000 off.</p>
+    </div>
+  </section>
+
+  <BottomCTA client:load />
+</Layout>

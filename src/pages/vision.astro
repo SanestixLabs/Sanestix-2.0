@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BottomCTA from '../components/home/BottomCTA';
+---
+
+<Layout title="Vision | Sanestix">
+  <section class="w-full pt-12 pb-20 px-6 lg:px-12 max-w-[1600px] mx-auto">
+    <div class="flex flex-col lg:flex-row items-center gap-16">
+      <div class="w-full lg:w-1/2">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-2 h-2 rounded-full bg-[#00bfff]"></div>
+          <span class="text-sm font-bold text-[#00bfff] tracking-widest uppercase">OUR VISION</span>
+        </div>
+        <h1 class="text-5xl md:text-6xl lg:text-[72px] font-bold text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-8">
+          The future of <span class="text-[#00bfff]">autonomous work.</span>
+        </h1>
+        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed mb-6">
+          We believe that within the next decade, the vast majority of repetitive, administrative, and purely executional tasks will be entirely managed by autonomous AI agents and intelligent workflows.
+        </p>
+        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
+          Our vision is a world where human talent is completely freed from the friction of execution. By engineering autonomous AI systems today, we allow your teams to focus purely on strategy, deep work, and human creativity tomorrow.
+        </p>
+      </div>
+      <div class="w-full lg:w-1/2 relative flex justify-center lg:justify-end">
+        <div class="relative w-full max-w-[700px] flex justify-center lg:justify-end">
+          <img src="/vision-hero.png" alt="Sanestix Vision" class="w-full h-auto object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-8 dark:rounded-[3rem] transform hover:scale-105 transition-all duration-700 ease-out" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <BottomCTA client:load />
+</Layout>
