@@ -31,6 +31,14 @@ const slides = [
     imageLight: "/smart-chatbots-hero.png",
     tag: "Conversational AI",
     desc: "Deploy hyper-realistic AI voice agents and context-aware bots to handle inbound support and outbound sales.",
+  },
+  {
+    rotatingText: "Agentic AI Systems.",
+    imageDark: "/orb.jpg",
+    imageLight: "/orb.jpg",
+    tag: "Agentic AI",
+    desc: "We architect autonomous AI agents that think, decide, and act on their own — a self-contained intelligence layer built to run your business.",
+    frameOnDark: true,
   }
 ];
 
@@ -59,6 +67,7 @@ export default function HeroSlider() {
   }, []);
 
   const slide = slides[currentSlide];
+  const useCardFrame = isDark && slide.frameOnDark;
 
   const heroImage = (
     <AnimatePresence mode="popLayout">
@@ -73,15 +82,19 @@ export default function HeroSlider() {
         <img
           src={isDark ? slide.imageDark : slide.imageLight}
           alt={slide.rotatingText}
-          className="w-full h-full object-contain"
-          style={{
-            WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 16%, black 84%, transparent 100%)",
-            WebkitMaskComposite: "source-in, source-over",
-            maskImage:
-              "linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 16%, black 84%, transparent 100%)",
-            maskComposite: "intersect",
-          }}
+          className={`w-full h-full object-contain ${useCardFrame ? "bg-white p-8 sm:p-10 rounded-[2.5rem] shadow-2xl" : ""}`}
+          style={
+            useCardFrame
+              ? undefined
+              : {
+                  WebkitMaskImage:
+                    "linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 16%, black 84%, transparent 100%)",
+                  WebkitMaskComposite: "source-in, source-over",
+                  maskImage:
+                    "linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 16%, black 84%, transparent 100%)",
+                  maskComposite: "intersect",
+                }
+          }
           loading="eager"
         />
       </motion.div>
