@@ -149,9 +149,11 @@ export default function HeroSlider() {
                 className="w-full h-full object-contain"
                 style={{
                   WebkitMaskImage:
-                    "radial-gradient(ellipse 98% 98% at 50% 50%, black 82%, transparent 105%)",
+                    "linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 16%, black 84%, transparent 100%)",
+                  WebkitMaskComposite: "source-in, source-over",
                   maskImage:
-                    "radial-gradient(ellipse 98% 98% at 50% 50%, black 82%, transparent 105%)",
+                    "linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 16%, black 84%, transparent 100%)",
+                  maskComposite: "intersect",
                 }}
                 loading="eager"
               />
