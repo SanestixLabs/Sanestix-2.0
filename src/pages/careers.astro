@@ -1,29 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import BottomCTA from '../components/home/BottomCTA';
-import { ArrowRight, Globe2, Rocket, Sparkles, GraduationCap, HeartHandshake, Users2, FileText, MessagesSquare, Handshake } from 'lucide-react';
+import { ArrowRight, Globe2, Rocket, Sparkles, GraduationCap, HeartHandshake, Users2 } from 'lucide-react';
 
 const roles = [
   {
-    title: 'Senior AI Engineer',
-    dept: 'Engineering',
+    title: 'Sales Representative / Business Development Executive',
+    dept: 'Sales',
     loc: 'Remote',
     type: 'Full-time',
-    blurb: 'Design and ship the AI systems and agent architectures that power our clients\u2019 automation stacks, from LLM orchestration to production-grade RAG pipelines.'
-  },
-  {
-    title: 'Workflow Automation Architect',
-    dept: 'Solutions',
-    loc: 'Remote',
-    type: 'Full-time',
-    blurb: 'Map messy, manual client operations and turn them into clean, reliable automations across CRMs, communication tools, and internal systems.'
-  },
-  {
-    title: 'Growth Marketing Manager',
-    dept: 'Marketing',
-    loc: 'San Francisco / Remote',
-    type: 'Full-time',
-    blurb: 'Own our demand-generation engine end to end \u2014 positioning, content, paid channels, and funnel experiments that turn interest into booked strategy calls.'
+    blurb: 'Build relationships with prospective clients, understand their business needs, and present Sanestix services that help them grow. Manage outreach and follow-ups through the sales process.'
   }
 ];
 ---
@@ -41,10 +27,10 @@ const roles = [
         Join the automation revolution.
       </h1>
       <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed mb-6">
-        We're always looking for elite engineers, workflow architects, and growth experts to join our globally distributed team.
+        Join our team remotely and help businesses discover solutions that support their growth.
       </p>
       <p class="text-lg text-slate-500 dark:text-slate-400 max-w-2xl leading-relaxed">
-        We're a small, senior team building AI systems and automation for real clients \u2014 no legacy bureaucracy, no busywork, just meaningful engineering shipped fast.
+        We’re looking for a motivated sales professional who communicates clearly, builds strong client relationships, and follows opportunities through from first conversation to close.
       </p>
     </div>
   </section>
@@ -96,7 +82,7 @@ const roles = [
   <section class="w-full py-24 px-6 lg:px-12 max-w-[1600px] mx-auto">
     <div class="text-center mb-16">
       <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">Open roles</h2>
-      <p class="text-slate-500 dark:text-slate-400 max-w-xl mx-auto">Don't see an exact match? We'd still love to hear from you.</p>
+      <p class="text-slate-500 dark:text-slate-400 max-w-xl mx-auto">Explore our current opportunity and apply by email.</p>
     </div>
 
     <div class="flex flex-col gap-4 max-w-4xl mx-auto">
@@ -119,53 +105,6 @@ const roles = [
         </a>
       ))}
 
-      <a
-        href={`mailto:hello@sanestix.com?subject=${encodeURIComponent('Open Application')}`}
-        class="border border-dashed border-slate-300 dark:border-slate-700 p-6 md:p-8 rounded-2xl flex items-center justify-between gap-4 hover:border-[#00bfff] transition-all cursor-pointer group"
-      >
-        <div>
-          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Don't see the right role?</h3>
-          <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Send us an open application \u2014 we're always open to meeting exceptional people.</p>
-        </div>
-        <ArrowRight class="w-5 h-5 text-slate-400 dark:text-slate-500 group-hover:text-[#00bfff] group-hover:translate-x-1 transition-all shrink-0" />
-      </a>
-    </div>
-  </section>
-
-  {/* Hiring Process */}
-  <section class="w-full py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-900 border-y border-slate-100 dark:border-slate-800 relative overflow-hidden transition-colors duration-300">
-    <div class="absolute inset-0 bg-[linear-gradient(to_right,#0000000a_1px,transparent_1px),linear-gradient(to_bottom,#0000000a_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-    <div class="max-w-[1600px] mx-auto relative z-10">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">How hiring works</h2>
-        <p class="text-slate-500 dark:text-slate-400 max-w-xl mx-auto">A short, respectful process. Most candidates go from first email to offer in under two weeks.</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="bg-white dark:bg-slate-950 p-8 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none flex flex-col items-start gap-4">
-          <span class="text-sm font-bold text-[#00bfff] tracking-widest">01</span>
-          <div class="w-12 h-12 rounded-2xl bg-[#00bfff]/10 flex items-center justify-center"><FileText class="w-6 h-6 text-[#00bfff]" /></div>
-          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Apply</h3>
-          <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">Send us your resume and a short note on what you'd want to build here. No cover letter essays required.</p>
-        </div>
-        <div class="bg-white dark:bg-slate-950 p-8 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none flex flex-col items-start gap-4">
-          <span class="text-sm font-bold text-[#00bfff] tracking-widest">02</span>
-          <div class="w-12 h-12 rounded-2xl bg-[#00bfff]/10 flex items-center justify-center"><MessagesSquare class="w-6 h-6 text-[#00bfff]" /></div>
-          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Intro call</h3>
-          <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">A 30-minute conversation with the hiring lead to talk through your background and what the role actually involves.</p>
-        </div>
-        <div class="bg-white dark:bg-slate-950 p-8 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none flex flex-col items-start gap-4">
-          <span class="text-sm font-bold text-[#00bfff] tracking-widest">03</span>
-          <div class="w-12 h-12 rounded-2xl bg-[#00bfff]/10 flex items-center justify-center"><Rocket class="w-6 h-6 text-[#00bfff]" /></div>
-          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Work sample or trial project</h3>
-          <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">A short, paid, real-world task close to what you'd actually do here \u2014 no whiteboard trivia.</p>
-        </div>
-        <div class="bg-white dark:bg-slate-950 p-8 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none flex flex-col items-start gap-4">
-          <span class="text-sm font-bold text-[#00bfff] tracking-widest">04</span>
-          <div class="w-12 h-12 rounded-2xl bg-[#00bfff]/10 flex items-center justify-center"><Handshake class="w-6 h-6 text-[#00bfff]" /></div>
-          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Offer</h3>
-          <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">If it's a mutual fit, we move fast. Most candidates hear back within days, not weeks.</p>
-        </div>
-      </div>
     </div>
   </section>
 
