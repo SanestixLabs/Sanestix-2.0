@@ -12,6 +12,7 @@ const { title = "Sanestix - AI & Automation Solutions" } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
     <script is:inline>
       const theme = (() => {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
@@ -25,6 +26,16 @@ const { title = "Sanestix - AI & Automation Solutions" } = Astro.props;
     </script>
   </head>
   <body class="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans relative flex flex-col overflow-x-hidden transition-colors duration-300">
+    <script is:inline>
+      document.addEventListener('click', (event) => {
+        const trigger = event.target.closest('[data-calendly-popup="true"]');
+        if (!trigger) return;
+        if (window.Calendly) {
+          event.preventDefault();
+          window.Calendly.initPopupWidget({ url: 'https://calendly.com/sanestix-info/sanestix-free-strategy-call?primary_color=00cdff' });
+        }
+      });
+    </script>
     <Navbar client:load />
     <main class="flex-1 flex flex-col overflow-x-hidden">
       <slot />

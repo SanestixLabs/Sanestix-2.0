@@ -21,7 +21,7 @@ export default function BottomCTA() {
             </div>
           </div>
 
-          <a href="/contact" className="shrink-0 w-full sm:w-auto">
+          <a href="/book-a-call" data-calendly-popup="true" className="shrink-0 w-full sm:w-auto">
             <Button className="bg-[#0a192f] hover:bg-black text-white rounded-xl px-8 h-12 w-full">
               Book a Free Strategy Call <ArrowRight className="ml-2 w-4 h-4" />
             </Button>

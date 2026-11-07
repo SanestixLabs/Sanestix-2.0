@@ -146,7 +146,7 @@ export default function HeroSlider() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10 lg:mb-12">
-              <a href="/contact" className="w-full sm:w-auto">
+              <a href="/book-a-call" data-calendly-popup="true" className="w-full sm:w-auto">
                 <Button className="bg-[#0a0f1c] hover:bg-black text-white rounded-xl px-8 h-14 text-base w-full shadow-lg font-medium">
                   Book a Free Strategy Call <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>

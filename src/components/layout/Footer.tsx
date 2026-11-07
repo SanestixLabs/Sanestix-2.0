@@ -53,7 +53,7 @@ export default function Footer() {
               <li><a href="/about-us" className="hover:text-slate-900 dark:hover:text-white transition-colors">About</a></li>
               <li><a href="/careers" className="hover:text-slate-900 dark:hover:text-white transition-colors">Careers</a></li>
               <li><a href="/academy" className="hover:text-slate-900 dark:hover:text-white transition-colors">Academy</a></li>
-              <li><a href="/contact" className="hover:text-slate-900 dark:hover:text-white transition-colors">Contact</a></li>
+              <li><a href="/book-a-call" className="hover:text-slate-900 dark:hover:text-white transition-colors">Book a call</a></li>
             </ul>
           </div>
 

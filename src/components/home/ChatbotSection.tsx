@@ -3,6 +3,7 @@ import { Bot, MessageSquare, Briefcase, Send, RefreshCw, MoreHorizontal } from "
 import { Button } from "@/components/ui/button";
 
 export default function ChatbotSection() {
+  const bookingUrl = "https://calendly.com/sanestix-info/sanestix-free-strategy-call?primary_color=00cdff";
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -32,6 +33,23 @@ export default function ChatbotSection() {
   const handleSend = async (textToSend?: string) => {
     const text = typeof textToSend === 'string' ? textToSend : input;
     if (!text.trim()) return;
+
+    if (/\b(book|booking|schedule|appointment|strategy call|meeting)\b/i.test(text)) {
+      const timestamp = Date.now();
+      const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      setMessages((prev) => [
+        ...prev,
+        { id: timestamp, sender: "user", text, time },
+        {
+          id: timestamp + 1,
+          sender: "bot",
+          text: `You can book a free strategy call here: <a href="${bookingUrl}" target="_blank" rel="noopener noreferrer" style="color:#00bfff;text-decoration:underline">Choose a time</a>.`,
+          time,
+        },
+      ]);
+      setInput("");
+      return;
+    }
 
     // Add user message
     const userMessage = {
