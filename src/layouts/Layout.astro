@@ -27,13 +27,32 @@ const { title = "Sanestix - AI & Automation Solutions" } = Astro.props;
   </head>
   <body class="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans relative flex flex-col overflow-x-hidden transition-colors duration-300">
     <script is:inline>
-      document.addEventListener('click', (event) => {
-        const trigger = event.target.closest('[data-calendly-popup="true"]');
-        if (!trigger) return;
+      const calendlyUrl = 'https://calendly.com/sanestix-info/sanestix-free-strategy-call?primary_color=00cdff';
+      const openCalendlyPopup = () => {
         if (window.Calendly) {
-          event.preventDefault();
-          window.Calendly.initPopupWidget({ url: 'https://calendly.com/sanestix-info/sanestix-free-strategy-call?primary_color=00cdff' });
+          window.Calendly.initPopupWidget({ url: calendlyUrl });
+          return;
         }
+
+        const existingScript = document.querySelector('script[data-calendly-widget]');
+        if (existingScript) {
+          existingScript.addEventListener('load', () => window.Calendly?.initPopupWidget({ url: calendlyUrl }), { once: true });
+          return;
+        }
+
+        const script = document.createElement('script');
+        script.src = 'https://assets.calendly.com/assets/external/widget.js';
+        script.async = true;
+        script.dataset.calendlyWidget = 'true';
+        script.addEventListener('load', () => window.Calendly?.initPopupWidget({ url: calendlyUrl }), { once: true });
+        document.head.appendChild(script);
+      };
+
+      document.addEventListener('click', (event) => {
+        const trigger = event.target instanceof Element ? event.target.closest('[data-calendly-popup="true"]') : null;
+        if (!trigger) return;
+        event.preventDefault();
+        openCalendlyPopup();
       });
     </script>
     <Navbar client:load />
